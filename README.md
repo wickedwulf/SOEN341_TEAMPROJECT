@@ -2,6 +2,13 @@
 
 A Twitter-like website for our SOEN341 class
 
+# Technologies used
+
+* Python
+* Django
+* Bootstrap 
+* Pycharm
+
 # Member List (Github username):
 
 * Jimmy Lau (jimLau49)  
