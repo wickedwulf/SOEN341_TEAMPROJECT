@@ -2,6 +2,12 @@
 
 A Twitter-like website for our SOEN341 class
 
+# Core features
+
+posting tweets
+'liking' tweets
+following users
+
 # Technologies used
 
 * Python
