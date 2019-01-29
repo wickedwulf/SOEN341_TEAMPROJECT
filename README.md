@@ -12,7 +12,6 @@ A Twitter-like website for our SOEN341 class
 
 * Python
 * Django
-* React
 * Bootstrap 
 * Pycharm
 
