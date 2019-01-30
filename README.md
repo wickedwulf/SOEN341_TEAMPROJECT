@@ -7,8 +7,8 @@ A Twitter-like website for our SOEN341 class
 *  Posting tweets
 *  Liking tweets
 *  Following users
-*  Deleting a post
-*  Pinning a post
+*  Deleting tweets
+*  Pinning tweets
 
 # Technologies used
 
