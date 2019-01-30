@@ -4,9 +4,11 @@ A Twitter-like website for our SOEN341 class
 
 # Core features
 
-* posting tweets
-* 'liking' tweets
-* following users
+*  Posting tweets
+*  Liking tweets
+*  Following users
+*  Deleting tweets
+*  Pinning tweets
 
 # Technologies used
 
