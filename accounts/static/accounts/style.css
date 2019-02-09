@@ -1,6 +1,14 @@
+body{
+	background:#DA70D6;
+}
 .login-page{
+<<<<<<< HEAD:accounts/templates/accounts/style.css
 
 	width: 360px;
+=======
+	text-align: center;
+	width: 360px
+>>>>>>> login-page:accounts/static/accounts/style.css
 	padding: 10% 0 0;
 	margin: auto;
 
@@ -12,7 +20,6 @@
 	 border: none;
 	 color: black;
 	 padding: 12px 20px;
-	 text-align: center;
 	 text-decoration: none;
 	 display: inline-block;
 	 font-size: 16px;
@@ -23,10 +30,9 @@
 .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background:#DDA0DD;
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-  text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }	
