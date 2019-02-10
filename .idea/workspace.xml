@@ -94,15 +94,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://f8fb3496-4103-4f6a-9262-d674ffbeea21/schema/main/table/twitter__tweets">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="das://f8fb3496-4103-4f6a-9262-d674ffbeea21/schema/main/table/twitter_hash_link">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
@@ -141,6 +132,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="wickedwulf &lt;32551006+wickedwulf@users.noreply.github.com&gt;" />
         <option value="Lance" />
       </list>
     </option>
@@ -280,12 +272,20 @@
       <updated>1548870707658</updated>
       <workItem from="1548870711897" duration="1921000" />
       <workItem from="1549124684901" duration="7579000" />
-      <workItem from="1549825556508" duration="4956000" />
+      <workItem from="1549825556508" duration="5876000" />
     </task>
+    <task id="LOCAL-00001" summary="Added tables to the database for twitter.&#10;all tables have the prefix twitter_">
+      <created>1549830803284</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1549830803284</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14456000" />
+    <option name="totallyTimeSpent" value="15376000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
