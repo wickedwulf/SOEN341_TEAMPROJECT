@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tweets</title>
+</head>
+<body>
+<form class="site-form" action="posting.html" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" , value="tweet">
+</form>
+</body>
+</html>

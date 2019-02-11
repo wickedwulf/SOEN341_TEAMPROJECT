@@ -14,16 +14,15 @@
 
 
 <div class="login-page">
-    <h1> Login to Account </h1>
+    <h1> Create an Account </h1>
     <div class="form">
-        <form class="site-form" method="post" action="/accounts/login/">
+        <form class="site-form" method="post" action="/accounts/signup/">
             {% csrf_token %}
             {{ form }}
-            <input type="submit" , value="Login">
+            <input type="submit" , value="Signup">
         </form>
     </div>
 </div>
-
 
 </body>
 
