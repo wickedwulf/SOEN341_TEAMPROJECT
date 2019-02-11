@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>posting~</title>
+	<title>Create a new post</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'postings/styles.css' %}">
 </head>
 <body>
-hahaha
+    <form>
+        <h1 > Write whats on your mind! </h1>
+        <textarea id="postingArea"> </textarea>
+        <button>Submit</button>
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+        </button>
+
+
+    </form>
+
+    <form action="/your-name/" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+
+        <label for="your_name">Your name: </label>
+        <input id="your_name" type="text" name="your_name" maxlength="100" required>
+</form>
 </body>
-</html>>
+</html>
