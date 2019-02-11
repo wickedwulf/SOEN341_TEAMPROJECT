@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="200eb6a8-c3d8-41d4-893f-695139af87c9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangosrc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangosrc/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/postings/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/templates/postings/posting.html" beforeDir="false" afterPath="$PROJECT_DIR$/postings/templates/postings/posting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/postings/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/postings/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/postings/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="102">
+              <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="32" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -108,27 +105,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/postings/templates/postings/latest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+            <state relative-caret-position="136">
+              <caret line="8" column="121" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="121" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            <state relative-caret-position="391">
+              <caret line="23" column="121" selection-start-line="23" selection-start-column="121" selection-end-line="23" selection-end-column="121" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/signup.html">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="144" selection-start-line="18" selection-start-column="144" selection-end-line="18" selection-end-column="144" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -159,8 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/accounts/templates/accounts/login.html" />
-        <option value="$PROJECT_DIR$/accounts/urls.py" />
         <option value="f8fb3496-4103-4f6a-9262-d674ffbeea21/schema/main/table/twitter__tweets.sql" />
         <option value="$PROJECT_DIR$/accounts/models.py" />
         <option value="$PROJECT_DIR$/djangosrc/urls.py" />
@@ -172,6 +171,9 @@
         <option value="$PROJECT_DIR$/postings/urls.py" />
         <option value="$PROJECT_DIR$/postings/templates/postings/posting.html" />
         <option value="$PROJECT_DIR$/postings/templates/postings/latest.html" />
+        <option value="$PROJECT_DIR$/accounts/urls.py" />
+        <option value="$PROJECT_DIR$/accounts/templates/accounts/signup.html" />
+        <option value="$PROJECT_DIR$/accounts/templates/accounts/login.html" />
       </list>
     </option>
   </component>
@@ -320,7 +322,7 @@
       <workItem from="1549825556508" duration="10446000" />
       <workItem from="1549846155730" duration="3932000" />
       <workItem from="1549860050923" duration="20000" />
-      <workItem from="1549860762606" duration="12638000" />
+      <workItem from="1549860762606" duration="13598000" />
     </task>
     <task id="LOCAL-00001" summary="Added tables to the database for twitter.&#10;all tables have the prefix twitter_">
       <created>1549830803284</created>
@@ -350,11 +352,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549901362118</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-Added latest.html to postings section&#10;-info: root /postings/ page now has a link to latest which enumerates all the twittertweets objects and sorts by date, then displays it on the latest.html page&#10;&#10;-changed: made a few minor alterations here and there and added comments in places">
+      <created>1549908999825</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549908999825</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36536000" />
+    <option name="totallyTimeSpent" value="37496000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="21" width="1920" height="1058" extended-state="0" />
@@ -419,7 +428,8 @@
     <MESSAGE value="Added tables to the database for twitter.&#10;all tables have the prefix twitter_" />
     <MESSAGE value="-made a working login page&#10;-made a working create account page&#10;-added request capture for future logout&#10;-added admin page&#10;-added database management for postings/tweets db stuff under admin&#10;-incomplete: made some stuff in the postings folder for future work." />
     <MESSAGE value="-made a working login page&#10;-made a working create account page&#10;-added request capture for future logout&#10;-added admin page&#10;-added database management for postings/tweets db stuff under admin&#10;-incomplete: made some stuff in the postings folder for future work.&#10;&#10;-added comments to accounts/views.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="-made a working login page&#10;-made a working create account page&#10;-added request capture for future logout&#10;-added admin page&#10;-added database management for postings/tweets db stuff under admin&#10;-incomplete: made some stuff in the postings folder for future work.&#10;&#10;-added comments to accounts/views.py" />
+    <MESSAGE value="-Added latest.html to postings section&#10;-info: root /postings/ page now has a link to latest which enumerates all the twittertweets objects and sorts by date, then displays it on the latest.html page&#10;&#10;-changed: made a few minor alterations here and there and added comments in places" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Added latest.html to postings section&#10;-info: root /postings/ page now has a link to latest which enumerates all the twittertweets objects and sorts by date, then displays it on the latest.html page&#10;&#10;-changed: made a few minor alterations here and there and added comments in places" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/db.sqlite3">
@@ -556,13 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -590,16 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/postings/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/postings/templates/postings/tweets.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -610,20 +603,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/login.html">
+    <entry file="file://$PROJECT_DIR$/postings/templates/postings/latest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        <state relative-caret-position="136">
+          <caret line="8" column="121" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/postings/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/accounts/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/signup.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/postings/templates/postings/latest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+        <state relative-caret-position="306">
+          <caret line="18" column="144" selection-start-line="18" selection-start-column="144" selection-end-line="18" selection-end-column="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="121" selection-start-line="23" selection-start-column="121" selection-end-line="23" selection-end-column="121" />
         </state>
       </provider>
     </entry>

@@ -16,11 +16,12 @@
 <div class="login-page">
     <h1> Login to Account </h1>
     <div class="form">
-        <form class="site-form" method="post" action="/accounts/login/">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" , value="Login">
+        <form class="site-form" method="post" action="/accounts/login/"> <!-- set the form type and method of posting as well as the target -->
+            {% csrf_token %}                             <!-- We should always use this on pages that send data. security thing-->
+            {{ form }}                                   <!-- shows the django form data on the page and creates the object to be sent-->
+            <input type="submit" , value="Login">        <!-- does the submission action (it's a button) -->
         </form>
+        <a href="/accounts/signup/">Create an account</a> <!-- added to allow users to quickly get to create account page -->
     </div>
 </div>
 
