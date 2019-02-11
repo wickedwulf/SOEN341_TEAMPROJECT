@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class TwitterTweets(models.Model):
     tweet_id = models.CharField(max_length=255)
-    content = models.CharField(max_length=280)
+    content = models.TextField(max_length=280)
     author_id = models.CharField(max_length=255)
     reply_id = models.CharField(max_length=255)
     replies = models.BigIntegerField

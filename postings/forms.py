@@ -1,8 +1,10 @@
 from django import forms
 from . import models
+from django.utils import timezone
 
-class NewPostsForm(forms.ModelForm):
+
+
+class NewTweetForm(forms.ModelForm):
     class Meta:
         model = models.TwitterTweets
-        fields = ['content']
-
+        fields = ['content', 'author_id']

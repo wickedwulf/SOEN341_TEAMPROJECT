@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tweets</title>
-</head>
-<body>
-<form class="site-form" action="posting.html" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" , value="tweet">
-</form>
-</body>
-</html>
+{% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
+{% block content %}
+    <center>
+    <div class="post-tweet">
+        <h1> Tweet Something </h1>
+        <form class="site-form" action="tweets.html" method="post">
+            {% csrf_token %}
+            {{ postform }}
+            <input type="submit" , value="post">
+        </form>
+    </div>
+    <a href="latest.html">Latest Tweets</a>
+    </center>
+{% endblock %}
