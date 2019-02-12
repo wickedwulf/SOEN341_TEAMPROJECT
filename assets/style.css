@@ -1,0 +1,29 @@
+body {
+    background: white;
+}
+.boxed {
+  border: 2px solid black ;
+
+}
+.button1 {
+
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: white;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}	
