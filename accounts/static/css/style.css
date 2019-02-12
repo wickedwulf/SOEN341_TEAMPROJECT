@@ -2,13 +2,9 @@ body{
 	background:#DA70D6;
 }
 .login-page{
-<<<<<<< HEAD:accounts/templates/accounts/style.css
-
-	width: 360px;
-=======
 	text-align: center;
-	width: 360px
->>>>>>> login-page:accounts/static/accounts/style.css
+	width: 360px;
+>>>>>>> login-page:accounts/static/css/style.css;
 	padding: 10% 0 0;
 	margin: auto;
 
