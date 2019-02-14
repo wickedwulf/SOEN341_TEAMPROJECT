@@ -3,6 +3,12 @@ python:
   - "3.7-dev"
 env:
   - DJANGO_ENV=travis
+before_install:
+  - export PIP_USE_MIRRORS=true
+install:
+  - pip install -r requirements.txt
+  - pip install django==$DJANGO --quiet
+
 script:
   - python manage.py test accounts -v 2
   - python manage.py test core_site -v 2
