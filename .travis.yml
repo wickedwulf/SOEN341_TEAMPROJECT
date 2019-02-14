@@ -1,9 +1,10 @@
 language: python
 python:
-  - "3.7-dev"
-install:
-  - pip install -r requirements/travis.pip
+  - "3.7"
 env:
   - DJANGO_ENV=travis
 script:
-  - python manage.py test applications -v 2
+  - python manage.py test accounts -v 2
+  - python manage.py test core_site -v 2
+  - python manage.py test home -v 2
+  - python manage.py test djangosrc -v 2
