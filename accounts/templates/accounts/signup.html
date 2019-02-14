@@ -3,27 +3,27 @@
     <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 </head>
 <body class="body">
 
-
-<div class="login-page">
+<center>
+<div class="signup-page">
     <h1> Create an Account </h1>
     <div class="form">
         <form class="site-form" method="post" action="/accounts/signup/"> <!-- set the form type and method of posting as well as the target -->
             {% csrf_token %}                       <!-- We should always use this on pages that send data. security thing-->
             {{ form }}                             <!-- shows the django form data on the page and creates the object to be sent-->
-            <input type="submit" , value="Signup"> <!-- does the submission action (it's a button) -->
+           <p> <input type="submit" , value="Signup">  </p><!-- does the submission action (it's a button) -->
         </form>
     </div>
 </div>
-
+</center>
 </body>
 
 </html>

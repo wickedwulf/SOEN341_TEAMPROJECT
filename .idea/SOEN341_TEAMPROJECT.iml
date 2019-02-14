@@ -25,6 +25,8 @@
         <option value="$MODULE_DIR$/accounts/templates" />
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/home/templates" />
+        <option value="$MODULE_DIR$/overlay/templates" />
+        <option value="$MODULE_DIR$/coresite/templates" />
       </list>
     </option>
   </component>

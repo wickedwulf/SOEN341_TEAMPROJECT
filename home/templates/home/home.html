@@ -1,0 +1,31 @@
+{% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
+{% block content %}
+    {% if user.is_authenticated %}
+     <br>
+    <br>
+    <br>
+    <br>
+<center>
+        <div class="latest_tweets">
+
+            {% for latest_tweet in latest_tweets %}
+                <!--  Creates a python foreach type loop that enumerates all object data -->
+                <div class="latest_tweet">           <!--  single object data -->
+                    <div class="boxed">
+                        <br>{{ latest_tweet.author_id }} Posted:
+                        <!--  fields found in models.py used for displaying our data -->
+                        <br>{{ latest_tweet.content }}
+                        <br>Posted on {{ latest_tweet.published }}
+                    </div>
+                </div>
+            {% endfor %} <!--  needed to end for loop -->
+
+        </div>
+        </center>
+
+    {% else %}
+        <script>
+            window.location.href = '/';
+        </script>
+    {% endif %}
+{% endblock %}
