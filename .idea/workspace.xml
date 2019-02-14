@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="200eb6a8-c3d8-41d4-893f-695139af87c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-    </list>
+    <list default="true" id="200eb6a8-c3d8-41d4-893f-695139af87c9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="136">
+              <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -326,7 +323,7 @@
       <workItem from="1549825556508" duration="10446000" />
       <workItem from="1549846155730" duration="3932000" />
       <workItem from="1549860050923" duration="20000" />
-      <workItem from="1549860762606" duration="83647000" />
+      <workItem from="1549860762606" duration="84253000" />
     </task>
     <task id="LOCAL-00001" summary="Added tables to the database for twitter.&#10;all tables have the prefix twitter_">
       <created>1549830803284</created>
@@ -405,11 +402,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550164897502</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234">
+      <created>1550165298323</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1550165298323</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107545000" />
+    <option name="totallyTimeSpent" value="108151000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -422,14 +426,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14818764" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14818764" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32972974" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30944964" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30944964" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -438,7 +441,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972974" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.34579438" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.34579438" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32917964" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32917964" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.16926272" />
@@ -887,8 +890,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="136">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
         </state>
       </provider>
     </entry>
