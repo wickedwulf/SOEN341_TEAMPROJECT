@@ -2,55 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="200eb6a8-c3d8-41d4-893f-695139af87c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/userprofile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/templates/core_site/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core_site/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/home/templates/home/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SOEN341_TEAMPROJECT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SOEN341_TEAMPROJECT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f8fb3496-4103-4f6a-9262-d674ffbeea21.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f8fb3496-4103-4f6a-9262-d674ffbeea21.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webResources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangosrc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangosrc/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangosrc/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangosrc/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/migrations/0002_auto_20190211_1247.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/migrations/0003_auto_20190211_1514.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/templates/postings/latest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/templates/postings/posting.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/templates/postings/tweets.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postings/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/basic_style_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/basic_style_layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,14 +46,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core_site/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="90" selection-start-line="13" selection-start-column="90" selection-end-line="13" selection-end-column="90" />
+            <state relative-caret-position="272">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -211,6 +173,7 @@
         <option value="$PROJECT_DIR$/accounts/views.py" />
         <option value="$PROJECT_DIR$/templates/basic_style_layout.html" />
         <option value="$PROJECT_DIR$/core_site/views.py" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -242,6 +205,11 @@
               <item name="SOEN341_TEAMPROJECT" type="b2602c69:ProjectViewProjectNode" />
               <item name="SOEN341_TEAMPROJECT" type="462c0819:PsiDirectoryNode" />
               <item name="core_site" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SOEN341_TEAMPROJECT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SOEN341_TEAMPROJECT" type="462c0819:PsiDirectoryNode" />
+              <item name="djangosrc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SOEN341_TEAMPROJECT" type="b2602c69:ProjectViewProjectNode" />
@@ -358,7 +326,7 @@
       <workItem from="1549825556508" duration="10446000" />
       <workItem from="1549846155730" duration="3932000" />
       <workItem from="1549860050923" duration="20000" />
-      <workItem from="1549860762606" duration="82348000" />
+      <workItem from="1549860762606" duration="83647000" />
     </task>
     <task id="LOCAL-00001" summary="Added tables to the database for twitter.&#10;all tables have the prefix twitter_">
       <created>1549830803284</created>
@@ -423,11 +391,25 @@
       <option name="project" value="LOCAL" />
       <updated>1549946565958</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234">
+      <created>1550161598634</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1550161598634</updated>
+    </task>
+    <task id="LOCAL-00011" summary="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234">
+      <created>1550164897502</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1550164897502</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106246000" />
+    <option name="totallyTimeSpent" value="107545000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -505,16 +487,10 @@
     <MESSAGE value="-added: added a link to create account on the login page&#10;-added: added more comments" />
     <MESSAGE value="-created: page to write posts using django auto forms using our db layout&#10;-added: temp logo for homepage if you goto root ip&#10;--added: logo and links on /postings/ root so you can access both viewing and writing a tweet&#10;&#10;--added: links to both the view latest tweets and write tweets pages&#10;&#10;--added: generalized styling options using a base layout and css which we can configure to our liking&#10;&#10;--added: comments on most of the stuff i did.... I might have forgotten something so just lemme know if I did&#10;&#10;--Note: admin account login is  &#10;Login: admin&#10;Pass: test1234" />
     <MESSAGE value="--fix: was missing a few files that didn't get pushed&#10;&#10;Login: admin&#10;Pass: test1234" />
-    <option name="LAST_COMMIT_MESSAGE" value="--fix: was missing a few files that didn't get pushed&#10;&#10;Login: admin&#10;Pass: test1234" />
+    <MESSAGE value="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234" />
+    <option name="LAST_COMMIT_MESSAGE" value="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/overlay/templates/overlay/modalcontent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/overlay/templates/overlay/dum.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -901,11 +877,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core_site/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="90" selection-start-line="13" selection-start-column="90" selection-end-line="13" selection-end-column="90" />
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
