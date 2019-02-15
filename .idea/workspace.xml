@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="200eb6a8-c3d8-41d4-893f-695139af87c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="39" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="39" />
+            <state relative-caret-position="204">
+              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -334,7 +334,7 @@
       <workItem from="1549825556508" duration="10446000" />
       <workItem from="1549846155730" duration="3932000" />
       <workItem from="1549860050923" duration="20000" />
-      <workItem from="1549860762606" duration="87145000" />
+      <workItem from="1549860762606" duration="87500000" />
     </task>
     <task id="LOCAL-00001" summary="Added tables to the database for twitter.&#10;all tables have the prefix twitter_">
       <created>1549830803284</created>
@@ -448,11 +448,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550179950982</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="--change: fine tuning the travis-cl file&#10;Login: admin&#10;Pass: test1234">
+      <created>1550188736302</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1550188736302</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111043000" />
+    <option name="totallyTimeSpent" value="111398000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,7 +474,7 @@
     <frame x="-1923" y="-74" width="1920" height="1058" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14946237" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14946237" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -481,8 +488,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972974" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32917964" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32864866" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32917964" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.16926272" />
       <window_info anchor="bottom" id="manage.py@SOEN341_TEAMPROJECT" order="15" weight="0.32917964" />
@@ -531,7 +538,8 @@
     <MESSAGE value="-created: page to write posts using django auto forms using our db layout&#10;-added: temp logo for homepage if you goto root ip&#10;--added: logo and links on /postings/ root so you can access both viewing and writing a tweet&#10;&#10;--added: links to both the view latest tweets and write tweets pages&#10;&#10;--added: generalized styling options using a base layout and css which we can configure to our liking&#10;&#10;--added: comments on most of the stuff i did.... I might have forgotten something so just lemme know if I did&#10;&#10;--Note: admin account login is  &#10;Login: admin&#10;Pass: test1234" />
     <MESSAGE value="--fix: was missing a few files that didn't get pushed&#10;&#10;Login: admin&#10;Pass: test1234" />
     <MESSAGE value="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234" />
-    <option name="LAST_COMMIT_MESSAGE" value="--added: user profile page and database tables&#10;--added: code to give a little bar for the buttons to go&#10;--changed: combined the post and postview htmls into one page&#10;--removed: removed postings and replaced with home&#10;--added: a new tables for the db and append to the old one&#10;--misc:  general fixes and stuff here and there&#10;&#10;Login: admin&#10;Pass: test1234" />
+    <MESSAGE value="--change: fine tuning the travis-cl file&#10;Login: admin&#10;Pass: test1234" />
+    <option name="LAST_COMMIT_MESSAGE" value="--change: fine tuning the travis-cl file&#10;Login: admin&#10;Pass: test1234" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/overlay/views.py">
@@ -922,8 +930,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="39" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="39" />
+        <state relative-caret-position="204">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
         </state>
       </provider>
     </entry>

@@ -10,7 +10,7 @@ matrix:
   - DJANGO=2.1.5
 install:
   - pip install -q -r requirements.txt
-  - pip install django=2.1.5
+  - pip install Django==2.1.7
 
 script:
   - python manage.py test accounts -v 2
