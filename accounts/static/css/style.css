@@ -1,34 +1,35 @@
-body{
-	background:#DA70D6;
-}
-.login-page{
-	text-align: center;
-	width: 360px;
->>>>>>> login-page:accounts/static/css/style.css;
-	padding: 10% 0 0;
-	margin: auto;
-
+body {
+    background: #DA70D6;
 }
 
-.button1{
+.login-page {
+    text-align: center;
+    width: 360px;
+>>> >>> > login-page: accounts /static/ css / style . css;
+    padding: 10% 0 0;
+    margin: auto;
 
-	 background-color: #e7e7e7;
-	 border: none;
-	 color: black;
-	 padding: 12px 20px;
-	 text-decoration: none;
-	 display: inline-block;
-	 font-size: 16px;
-	 margin: 4px 2px;
-	 cursor: pointer;
+}
+
+.button {
+
+    background-color: #e7e7e7;
+    border: none;
+    color: black;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 .form {
-  position: relative;
-  z-index: 1;
-  background:#DDA0DD;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}	
+    position: relative;
+    z-index: 1;
+    background: #DDA0DD;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}

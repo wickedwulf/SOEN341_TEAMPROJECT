@@ -1,0 +1,62 @@
+{% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <br>
+        <br>
+        <br>
+        <a href="/home/home.html">
+            <center>
+                <img src
+                             ="/static/soen341logo.png" title="Lets GO!"></center>
+        </a>
+    {% else %}
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <button type="core-site-logo-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#logindialog">
+                <img
+                        src="/static/soen341logo.png" title="Log me in!"></button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="logindialog" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Login to Account</h4>
+                        </div>
+                        <!-- Modal body-->
+                        <div class="modal-body">
+                            <div class="container">
+                                <form class="home-login-form" method="post" action="/accounts/login/">
+                                    <!-- set the form type and method of posting as well as the target -->
+                                    {% csrf_token %}
+                                    <!-- We should always use this on pages that send data. security thing-->
+                                    {{ form }}
+                                    <!-- shows the django form data on the page and creates the object to be sent-->
+                                    <div class="home-login-btn"><input type="submit" , value="Login"></div>
+                                    <!-- does the submission action (it's a button) -->
+                                </form>
+                                <div class="home-signup-btn"><a href="/accounts/signup/">Create an account</a></div>
+                                <!-- added to allow users to quickly get to create account page -->
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    {% endif %}
+    <center><h1>A Twitter Tale</h1></center>
+{% endblock %}

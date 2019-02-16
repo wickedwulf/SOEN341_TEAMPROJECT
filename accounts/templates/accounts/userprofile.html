@@ -1,0 +1,22 @@
+{% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
+{% block content %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <center><h1>{{ userprofile.user_name }}</h1>
+        <p>Profile Name: {{ userprofile.user_profile_name }}
+        <p>Tweet Count: {{ userprofile.tweet_count }}
+        <p>Followers: {{ userprofile.follower_count }}
+        <p>Liked Tweets: {{ userprofile.liked_tweet_count }}
+    </center>
+{% endblock %}
+

@@ -1,10 +1,18 @@
 body {
     background: white;
 }
-.boxed {
-  border: 2px solid black ;
 
+.boxed {
+    border: 2px solid black;
+    position: relative;
+    margin: 0 40%;
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-column-align: center;
 }
+
 .button1 {
 
     background-color: white;
@@ -15,7 +23,7 @@ body {
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer;
+   cursor: pointer;
 }
 
 .form {
@@ -26,4 +34,75 @@ body {
     margin: 0 auto 100px;
     padding: 45px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}	
+}
+
+ul#horizontal-list {
+    min-width: 696px;
+    list-style: none;
+    padding-top: 20px;
+}
+
+ul#horizontal-list li {
+    display: inline;
+}
+
+.logout-link{
+
+    background-color: #DA70D6;
+
+}
+.container {
+    max-width: 400px;
+    width: 100%;
+    margin:  auto;
+    position: relative;
+}
+.modal-dialog{
+    max-width: fit-content;
+    max-height: fit-content;
+}
+.home-signup-btn {
+    text-align: center;
+}
+.post-tweet input, .post-tweet textarea {
+    display: block;
+    padding: 1px;
+}
+.post-tweet input{
+        margin-top: 10px;
+}
+.home-login-form input, .home-login-form textarea{
+    display: block;
+    padding: 1px;
+}
+.core-site-logo-btn button{
+    display: block;
+}
+
+
+.home-login-btn{
+     margin-left: 35%;
+     margin-right: auto;
+     padding: 5px;
+}
+nav{
+    justify-self: end;
+}
+nav li{
+    display: inline-block;
+    margin-left: 20px;
+}
+nav button{
+    cursor: pointer;
+    background: white;
+    color: black;
+    border: 1px solid;
+    border-color: black;
+    font-size: 1em;
+}
+
+.modal-body input .modal-body textarea{
+    display: block;
+         padding: 5px;
+    background-color: #DA70D6;
+}

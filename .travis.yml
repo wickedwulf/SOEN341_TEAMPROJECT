@@ -1,1 +1,19 @@
 language: python
+python:
+  - "3.7-dev"
+env:
+  - DJANGO_ENV=travis
+before_install:
+  - export PIP_USE_MIRRORS=true
+
+matrix:
+  - DJANGO=2.1.5
+install:
+  - pip install -q -r requirements.txt
+  - pip install Django==2.1.7
+
+script:
+  - python manage.py test accounts -v 2
+  - python manage.py test core_site -v 2
+  - python manage.py test home -v 2
+  - python manage.py test djangosrc -v 2
