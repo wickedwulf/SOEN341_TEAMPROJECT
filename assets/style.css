@@ -47,9 +47,6 @@ ul#horizontal-list li {
 }
 
 .logout-link{
-
-    background-color: #DA70D6;
-
 }
 .container {
     max-width: 400px;
@@ -85,24 +82,67 @@ ul#horizontal-list li {
      margin-right: auto;
      padding: 5px;
 }
+
+/* START OF CSS FOR NAVIGATION BAR */
 nav{
+    min-width: 1000px;
     justify-self: end;
 }
 nav li{
     display: inline-block;
-    margin-left: 20px;
+    text-align: center;
+    width: 150px;
 }
 nav button{
     cursor: pointer;
     background: white;
     color: black;
-    border: 1px solid;
-    border-color: black;
+    border: 3px solid;
+    border-color: lightgreen;
     font-size: 1em;
+    padding: 0px;
 }
+nav form{
+    margin: 0px;
+}
+.navbar-default{
+    height: 120px;
+    padding: 0px;
+    background-color: indianred;
+
+}
+.navbar-nav{
+    width: 100%;
+    height: 75px;
+    background-color: lightgreen;
+}
+.navbar-brand{
+    position:absolute;
+    height: 75px;
+    width: 150px;
+    padding: 0px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 45px;
+}
+.navbar-brand img{
+    width: 150px;
+    height: 150px;
+}
+.btn{
+    width: 100px;
+    background-color: mediumseagreen;
+    border-color: mediumseagreen;
+}
+nav ul{
+    height: 75px;
+}
+
+/* END OF CSS FOR NAVIGATION BAR*/
 
 .modal-body input .modal-body textarea{
     display: block;
-         padding: 5px;
+    padding: 5px;
     background-color: #DA70D6;
 }
