@@ -12,11 +12,33 @@
     <br>
     <br>
 
+
+   <style>
+   /* Puts the profile information at the topleft of the page
+      Also puts a green border around the information
+   */
+    .profilelocation {
+        width: 400px;
+        padding: 10px;
+        border: 3px solid green;
+        margin: 0;
+        position: fixed;
+        top: 140px;
+        left: 30px;
+    }
+
+   
+    </style>
+
+    <div class="profilelocation">
     <center><h1>{{ userprofile.user_name }}</h1>
         <p>Profile Name: {{ userprofile.user_profile_name }}
         <p>Tweet Count: {{ userprofile.tweet_count }}
         <p>Followers: {{ userprofile.follower_count }}
         <p>Liked Tweets: {{ userprofile.liked_tweet_count }}
     </center>
+    </div>
+
+
 {% endblock %}
 
