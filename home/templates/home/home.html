@@ -1,5 +1,6 @@
 {% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
 {% block content %}
+        {% load static i18n %}
     {% if user.is_authenticated %}
      <br>
     <br>
@@ -10,19 +11,31 @@
 
             {% for latest_tweet in latest_tweets %}
                 <!--  Creates a python foreach type loop that enumerates all object data -->
-                <div class="latest_tweet">           <!--  single object data -->
+                <div class="latest_tweet" role="dialog">           <!--  single object data -->
                     <div class="boxed">
                         <br>{{ latest_tweet.author_id }} Posted:
                         <!--  fields found in models.py used for displaying our data -->
-                        <br>{{ latest_tweet.content }}
-                        <br>Posted on {{ latest_tweet.published }}
+                        {% load emoji_tags %}
+                        <br>{{ latest_tweet.content|emoji_replace }}
+
+                        <br><img src ="{{ latest_tweet.media_attachment.url }}">
+                        <br>Posted on {{ latest_tweet.published }}.
+                        <div class="btn-group" role="group">
+                            <button type="button" class="glyphicon glyphicon-heart-empty" data-target="#follow"></button>
+                            <button type="button" class="glyphicon glyphicon-repeat" data-target="#reply"></button>
+                            <button type="button" class="glyphicon glyphicon-pushpin" data-target="#pin"></button>
+                        </div>
                     </div>
                 </div>
-            {% endfor %} <!--  needed to end for loop -->
+            {% endfor %} <!--  needed to end for loo -->
 
         </div>
         </center>
-
+<div id="follow" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <p>sex</p>
+    </div>
+</div>
     {% else %}
         <script>
             window.location.href = '/';

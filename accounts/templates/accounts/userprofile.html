@@ -17,6 +17,7 @@
         <p>Tweet Count: {{ userprofile.tweet_count }}
         <p>Followers: {{ userprofile.follower_count }}
         <p>Liked Tweets: {{ userprofile.liked_tweet_count }}
+        <p><img src="{{ userprofile.user_profile_picture.url }}" width="250" height="250"></p>
     </center>
 {% endblock %}
 

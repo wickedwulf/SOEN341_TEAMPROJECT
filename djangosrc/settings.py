@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'core_site',
     'widget_tweaks',
     'bootstrap_modal_forms',
+    'emoji',
+    'emoji_picker',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'site_media')
+MEDIA_URL = "/site_media/"

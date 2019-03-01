@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +26,8 @@ urlpatterns = [
     path('', include('core_site.urls')),
     url(r'^home/', include('home.urls')),
     url(r'^core_site/', include('core_site.urls')),
+    url(r'^site_media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, })
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+

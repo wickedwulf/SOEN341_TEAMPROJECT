@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from accounts.models import user_profile
 from home.forms import NewTweetForm
-from django.contrib.auth import authenticate
+
 
 
 def index(request):
