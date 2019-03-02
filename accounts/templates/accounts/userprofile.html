@@ -1,6 +1,8 @@
 {% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
 {% block content %}
 
+
+
     <br>
     <br>
     <br>
@@ -27,7 +29,23 @@
         left: 30px;
     }
 
-   
+   .tweetinfo{
+       width: 900px;
+       padding: 20px;
+       border: 3px solid black;
+       margin: 0;
+       position: absolute;
+       top: 340;
+       left: 500px;
+       LINE-HEIGHT: 10px;
+   }
+
+   .leftmargin{
+       left: 30px;
+
+   }
+
+
     </style>
 
     <div class="profilelocation">
@@ -39,6 +57,32 @@
     </center>
     </div>
 
+    <div class="tweetinfo">
+            <p style="white-space:nowrap;">
+                <span style="font-size: 172%;font-weight:bold; ">{{ userprofile.user_name }} </span>&nbsp;&nbsp;
+                <span style="font-size: larger; ">{{ userprofile.user_profile_name }}</span>
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                <span> time here</span>
+
+            </p>
+
+
+    <br>
+    <center>
+    <p> tweet goes here </p>
+
+
+
+
+    </center>
+    </div>
+
+
+
 
 {% endblock %}
+
 
