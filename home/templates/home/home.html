@@ -1,41 +1,46 @@
 {% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
 {% block content %}
-        {% load static i18n %}
     {% if user.is_authenticated %}
-     <br>
-    <br>
-    <br>
-    <br>
-<center>
-        <div class="latest_tweets">
+        <br>
+        <br>
+        <br>
+        <br>
+        <style>
+            button, input[type="submit"]{
+                background: none;
+                color: inherit;
+                border: none;
+                padding: 0;
+                font: inherit;
+                cursor: pointer;
+                outline: inherit;
+            }
+        </style>
+        <center>
+            <div class="latest_tweets">
 
-            {% for latest_tweet in latest_tweets %}
-                <!--  Creates a python foreach type loop that enumerates all object data -->
-                <div class="latest_tweet" role="dialog">           <!--  single object data -->
-                    <div class="boxed">
-                        <br>{{ latest_tweet.author_id }} Posted:
-                        <!--  fields found in models.py used for displaying our data -->
-                        {% load emoji_tags %}
-                        <br>{{ latest_tweet.content|emoji_replace }}
+                {% for tweet in latest_tweets %}
+                    <!--  Creates a python foreach type loop that enumerates all object data -->
+                    <div class="latest_tweet">           <!--  single object data -->
+                        <div class="boxed">
+                            <br>{{ tweet.author_id }} Posted:
+                            <!--  fields found in models.py used for displaying our data -->
+                            <br>{{ tweet.content }}
+                            <br>Posted on {{ tweet.published }}
+                            <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+                                  method="post">
+                                {% csrf_token %}
+                                {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="18" height="18">
 
-                        <br><img src ="{{ latest_tweet.media_attachment.url }}">
-                        <br>Posted on {{ latest_tweet.published }}.
-                        <div class="btn-group" role="group">
-                            <button type="button" class="glyphicon glyphicon-heart-empty" data-target="#follow"></button>
-                            <button type="button" class="glyphicon glyphicon-repeat" data-target="#reply"></button>
-                            <button type="button" class="glyphicon glyphicon-pushpin" data-target="#pin"></button>
+                            </form>
+
                         </div>
                     </div>
-                </div>
-            {% endfor %} <!--  needed to end for loo -->
+                {% endfor %} <!--  needed to end for loop -->
 
-        </div>
+            </div>
         </center>
-<div id="follow" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <p>sex</p>
-    </div>
-</div>
+
     {% else %}
         <script>
             window.location.href = '/';

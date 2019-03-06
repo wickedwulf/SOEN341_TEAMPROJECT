@@ -1,6 +1,8 @@
 {% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
 {% block content %}
 
+
+
     <br>
     <br>
     <br>
@@ -12,12 +14,89 @@
     <br>
     <br>
 
-    <center><h1>{{ userprofile.user_name }}</h1>
-        <p>Profile Name: {{ userprofile.user_profile_name }}
-        <p>Tweet Count: {{ userprofile.tweet_count }}
-        <p>Followers: {{ userprofile.follower_count }}
-        <p>Liked Tweets: {{ userprofile.liked_tweet_count }}
-        <p><img src="{{ userprofile.user_profile_picture.url }}" width="250" height="250"></p>
-    </center>
+
+    <style>
+        /* Puts the profile information at the topleft of the page
+           Also puts a green border around the information
+        */
+        .profilelocation {
+            position: center;
+            width: 400px;
+            padding: 10px;
+            border: 3px solid green;
+            margin: 0;
+            position: fixed;
+            top: 140px;
+            left: 30px;
+        }
+
+        .tweetinfo {
+            width: 900px;
+            padding: 20px;
+            border: 3px solid black;
+            margin: 0;
+            position: absolute;
+            top: 340;
+            left: 500px;
+            LINE-HEIGHT: 10px;
+        }
+
+
+
+    </style>
+
+    <div class="profilelocation">
+        <center><h1>{{ userprofile.user_name }}</h1>
+            <p><img src="{{ userprofile.user_profile_picture.url }}" width="150" height="150"></p>
+            <form class="profilelocation_site-form" method="post" action="/accounts/userprofile/"
+                  enctype="multipart/form-data">
+                <!-- set the form type and method of posting as well as the target -->
+                {% csrf_token %}
+                <!-- We should always use this on pages that send data. security thing-->
+                <br>{{ edituserprofile.user_profile_picture }}</br>
+                <br>Profile Name: {{ userprofile.user_profile_name }}
+                <br>Password: Place holder
+                <br>Tweet Count: {{ userprofile.tweet_count }}
+                <br>Liked Count: {{ userprofile.liked_tweet_count }}
+                <br>Followers: {{ userprofile.follower_count }}
+                <br>First Name: {{ userprofile.user_first_name }}
+                <br>Last Name: {{ userprofile.user_last_name }}
+                <br>Email: {{ userprofile.user_email }}
+                <br>Phone #: {{ userprofile.user_phone }}
+                <br>Country: {{ userprofile.user_country }}
+                <br>Web Site: {{ userprofile.user_website  }}
+                <br>Joined: {{ userprofile.created_on }}
+                <br><input type="submit" , value="Save changes"></br>        <!-- does the submission action (it's a button) -->
+            </form>
+        </center>
+    </div>
+
+    <div class="tweetinfo">
+        {% for latest_tweet in my_tweets %}
+            <p style="white-space:nowrap;">
+                <span style="font-size: 172%;font-weight:bold; ">{{ userprofile.user_name }} </span>&nbsp;&nbsp;
+                <span style="font-size: larger; ">{{ userprofile.user_profile_name }}</span>
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                <span>{{ latest_tweet.published }}</span>
+
+            </p>
+
+
+            <br>
+            <center>
+                <p>{{ latest_tweet.content }}</p>
+
+
+            </center>
+        {% endfor %} <!--  needed to end for loop -->
+    </div>
+
+
+
+
 {% endblock %}
+
 
