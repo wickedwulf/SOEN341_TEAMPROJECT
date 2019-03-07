@@ -90,6 +90,13 @@
                                                 <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
                                         </form>
                                     {% endif %}
+
+                                <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <div class="column">
+                                        <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +109,7 @@
                     <div class="followed_tweets">
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
-                                {% if tweet.author_id == followed.followed_user %}
+                                {% if tweet.author_id == followed.followed_user and followed.liked_by_user == userprofile.user_profile_name%}
                                     <!--  Creates a python foreach type loop that enumerates all object data -->
                                     <div class="followed_tweet">           <!--  single object data -->
                                         <div class="boxed">
