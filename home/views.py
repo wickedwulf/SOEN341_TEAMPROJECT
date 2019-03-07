@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import forms
-from .models import Twitter_Tweet, Following_Tweets
+from .models import Twitter_Tweet, Following_Users, Liked_Tweets, Pinned_Posts
 from accounts.models import user_profile
 import hashlib
 
@@ -21,8 +21,7 @@ def homeactions(request):
                     userprofile.tweet_count = userprofile.tweet_count + 1  # increase post count by 1
                     userprofile.save()  # save updated count
                     new_form.author_id = user_profile_name.user_profile_name  # set the author id
-                    new_form.tweet_id = hashlib.sha1(
-                        new_form.content.encode('utf-8') + new_form.author_id.encode('utf-8')).hexdigest()
+                    new_form.tweet_id = hashlib.sha1(new_form.content.encode('utf-8') + new_form.author_id.encode('utf-8')).hexdigest()
 
                     new_form.save()  # save updated tweet to db
                     return redirect('home:home_actions')  # send user to latest page to view their tweet
@@ -32,57 +31,96 @@ def homeactions(request):
         if request.method == 'POST':
             postform = forms.NewTweetForm()
             like_tweet = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('liked')))
-            if Following_Tweets.objects.all().count() > 0:
+            if Liked_Tweets.objects.all().count() > 0:
                 try:
-                    Following_Tweets.objects.get(tweet_id="{}".format(query.get('liked')),
-                                                 liked_by_user=userprofile.user_profile_name).delete()
+                    Liked_Tweets.objects.get(tweet_id="{}".format(query.get('liked')), liked_by_user=userprofile.user_profile_name).delete()
                     print("deleted like from tweet")
                     userprofile.liked_tweet_count = userprofile.liked_tweet_count - 1
                     userprofile.save()
                     like_tweet.favourites = like_tweet.favourites - 1
                     like_tweet.save()
+                    following = Following_Users.objects.all()
                     latest_tweets = Twitter_Tweet.objects.all().order_by('published')
-                    return render(request, 'home/home.html',
-                                  {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets})
-                except Following_Tweets.DoesNotExist:
-                    print("Ignoring does not exist error")
+                    return render(request, 'home/home.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
+                except Liked_Tweets.DoesNotExist:
+                    print("Does not exist so creating it. Liked Post")
+                    like_add = Liked_Tweets()
+                    like_tweet.favourites = like_tweet.favourites + 1
+                    userprofile.liked_tweet_count = userprofile.liked_tweet_count + 1
+                    like_add.author_id = like_tweet.author_id
+                    like_add.tweet_id = like_tweet.tweet_id
+                    like_add.liked_by_user = userprofile.user_profile_name
+                    like_add.save()
+                    userprofile.save()
+                    like_tweet.save()
 
-            print("Add like to tweet")
-            followadd = Following_Tweets()
-            like_tweet.favourites = like_tweet.favourites + 1
-            userprofile.liked_tweet_count = userprofile.liked_tweet_count + 1
-            followadd.author_id = like_tweet.author_id
-            followadd.tweet_id = like_tweet.tweet_id
-            followadd.liked_by_user = userprofile.user_profile_name
-            followadd.save()
-            userprofile.save()
-            like_tweet.save()
+        following = Following_Users.objects.all()
         latest_tweets = Twitter_Tweet.objects.all().order_by(
             'published')  # pull all the data from our table and store in an object called latest_tweets
-        return render(request, 'home/home.html',
-                      {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets})
+        return render(request, 'home/home.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
 
     elif 'delete' in query.keys():
-        print(query.get('delete'))
         if request.method == 'POST':
             try:
                 Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('delete'))).delete()
             except Twitter_Tweet.DoesNotExist:
-                print("Ignoring does not exist error delete" + Twitter_Tweet)
+                print("Ignoring does not exist error delete")
+        following = Following_Users.objects.all()
         postform = forms.NewTweetForm()
-        latest_tweets = Twitter_Tweet.objects.all().order_by(
-        'published')  # pull all the data from our table and store in an object called latest_tweets
+        latest_tweets = Twitter_Tweet.objects.all().order_by('published')  # pull all the data from our table and store in an object called latest_tweets
         return render(request, 'home/home.html',
-                  {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets})
+                      {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
+
+
+    elif 'follow' in query.keys():
+        if request.method == 'POST':
+            try:
+                Following_Users.objects.get(followed_user="{}".format(query.get('follow')), liked_by_user=userprofile.user_profile_name).delete()
+                follow_profile = user_profile.objects.get(user_profile_name="{}".format(query.get('follow')))
+                follow_profile.follower_count = follow_profile.follower_count + 1
+                follow_profile.save()
+                print("deleted like from tweet")
+                following = Following_Users.objects.all()
+                postform = forms.NewTweetForm()
+                latest_tweets = Twitter_Tweet.objects.all().order_by('published')
+                return render(request, 'home/home.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
+
+            except Following_Users.DoesNotExist:
+                print("Does not exist so create it. Now following user")
+                follow_add = Following_Users()
+                follow_add.liked_by_user = userprofile.user_profile_name
+                follow_add.followed_user = "{}".format(query.get('follow'))
+                follow_add.save()
+                follow_profile = user_profile.objects.get(user_profile_name="{}".format(query.get('follow')))
+                follow_profile.follower_count = follow_profile.follower_count + 1
+                follow_profile.save()
+        latest_tweets = Twitter_Tweet.objects.all().order_by('published')  # pull all the data from our table and store in an object called latest_tweets
+        postform = forms.NewTweetForm()
+        following = Following_Users.objects.all()
+        return render(request, 'home/home.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
+
+    # pin the post by storing the id of the post and the user that pinned it
+    elif 'pin' in query.keys():
+        if request.method == 'POST':
+            try: # used to delete a pinned post
+                Pinned_Posts.objects.get(tweet_id="{}".format(query.get('pin')), pinned_by_user=userprofile.user_profile_name).delete()
+                print("Removing Pin")
+            except Pinned_Posts.DoesNotExist:
+                print("Does not exist so create it. Post has been pinned")
+                pin = Pinned_Posts()
+                pin.tweet_id = "{}".format(query.get('pin'))
+                pin.pinned_by_user = userprofile.user_profile_name
+                pin.save()
+        following = Following_Users.objects.all()
+        postform = forms.NewTweetForm()
+        latest_tweets = Twitter_Tweet.objects.all().order_by('published')
+        return render(request, 'home/home.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
+
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
     else:
-        latest_tweets = Twitter_Tweet.objects.all().order_by(
-            'published')  # pull all the data from our table and store in an object called latest_tweets
+        following = Following_Users.objects.all()
+        latest_tweets = Twitter_Tweet.objects.all().order_by('published')  # pull all the data from our table and store in an object called latest_tweets
         postform = forms.NewTweetForm()
         return render(request, 'home/home.html',
-                      {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets})
+                      {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets, 'following': following})
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
-
-
-def liked_tweet(request, liked):
-    return HttpResponse(liked)

@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from .models import user_profile
 from home.forms import NewTweetForm
-from home.models import Twitter_Tweet
+from home.models import Twitter_Tweet, Pinned_Posts
 from . import forms
 
 
@@ -83,14 +83,12 @@ def user_profile_view(request):
         userprofile = user_profile.objects.get(user_name=request.user)
         postform = NewTweetForm()
         edituserprofile = forms.EditUserProfile()
+        pinned = Pinned_Posts.objects.all()
         if userprofile.tweet_count > 0:
-            my_tweets = Twitter_Tweet.objects.all().filter(author_id=userprofile.user_profile_name)
-            return render(request, 'accounts/userprofile.html',
-                          {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile,
-                           'my_tweets': my_tweets})
+            tweets = Twitter_Tweet.objects.all()
+            return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile, 'tweets': tweets, 'pinned_posts': pinned})
         else:
-            return render(request, 'accounts/userprofile.html',
-                          {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile})
+            return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile, 'pinned_posts': pinned})
     # delete from history
     query = request.GET
     if 'delete' in query.keys():
@@ -101,9 +99,24 @@ def user_profile_view(request):
                 print("Ignoring does not exist error delete")
 
         userprofile = user_profile.objects.get(user_name=request.user)
+        pinned = Pinned_Posts.objects.all()
         postform = NewTweetForm()
         edituserprofile = forms.EditUserProfile()
-        my_tweets = Twitter_Tweet.objects.all().filter(author_id=userprofile.user_profile_name)
-        return render(request, 'accounts/userprofile.html',
-                      {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile,
-                       'my_tweets': my_tweets})
+        tweets = Twitter_Tweet.objects.all()
+        return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile, 'tweets': tweets, 'pinned_posts': pinned})
+
+# pin the post by storing the id of the post and the user that pinned it
+
+    elif 'pin' in query.keys():
+        if request.method == 'POST':
+            userprofile = user_profile.objects.get(user_name=request.user)
+            try:  # used to delete a pinned post
+                Pinned_Posts.objects.get(tweet_id="{}".format(query.get('pin')), pinned_by_user=userprofile.user_profile_name).delete()
+            except Pinned_Posts.DoesNotExist:
+                print("Ignoring does not exist error delete")
+
+        pinned = Pinned_Posts.objects.all()
+        postform = NewTweetForm()
+        edituserprofile = forms.EditUserProfile()
+        tweets = Twitter_Tweet.objects.all()
+        return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile, 'tweets': tweets, 'pinned_posts': pinned})
