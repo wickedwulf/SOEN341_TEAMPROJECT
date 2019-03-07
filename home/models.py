@@ -13,10 +13,14 @@ class Twitter_Tweet(models.Model):
     media_attachment = models.ImageField(upload_to='site_media', default='default.png', blank=True)
 
 
-
-class Following_Tweets(models.Model):
+class Liked_Tweets(models.Model):
     author_id = models.CharField(max_length=255, blank=True)
     tweet_id = models.CharField(max_length=255,  blank=True)
+    liked_by_user = models.CharField(max_length=255,  blank=True)
+
+
+class Following_Users(models.Model):
+    followed_user = models.CharField(max_length=255, blank=True)
     liked_by_user = models.CharField(max_length=255,  blank=True)
 
 
