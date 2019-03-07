@@ -1,6 +1,8 @@
 {% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
 {% block content %}
 
+
+
     <br>
     <br>
     <br>
@@ -12,11 +14,103 @@
     <br>
     <br>
 
+
+   <style>
+   /* Puts the profile information at the topleft of the page
+      Also puts a green border around the information
+   */
+    .profilelocation {
+        width: 400px;
+        padding: 10px;
+        border: 3px solid green;
+        margin: 0;
+        position: fixed;
+        top: 140px;
+        left: 30px;
+    }
+
+   .tweetinfo{
+       width: 900px;
+       padding: 20px;
+       border: 3px solid black;
+       margin: 0;
+       position: absolute;
+       top: 200;
+       left: 500px;
+       LINE-HEIGHT: 10px;
+   }
+
+   .leftmargin{
+       left: 30px;
+
+   }
+
+   .box2{
+
+    width: 700px;
+    padding: 5px;
+    border: 3px solid black;
+    position: relative;  
+    LINE-HEIGHT: 15px;
+ 
+   }
+
+
+    </style>
+
+    <div class="profilelocation">
     <center><h1>{{ userprofile.user_name }}</h1>
         <p>Profile Name: {{ userprofile.user_profile_name }}
         <p>Tweet Count: {{ userprofile.tweet_count }}
         <p>Followers: {{ userprofile.follower_count }}
         <p>Liked Tweets: {{ userprofile.liked_tweet_count }}
     </center>
+    </div>
+
+
+
+
+
+    <div class="tweetinfo">
+        {% for latest_tweet in latest_tweets %}
+        {% if latest_tweet.author_id == userprofile.user_profile_name %}
+
+        <div class="box2">
+
+            <p style="white-space:nowrap;">
+                <!-- <span style="font-size: 172%;font-weight:bold; ">{{ latest_tweet.author_id  }} </span>&nbsp;&nbsp; -->
+                <span style="font-size: larger; ">{{ latest_tweet.author_id  }}</span>
+            </br>
+            </br>
+                <span> {{ latest_tweet.published }} </span>
+
+            </p>
+
+
+
+    <br>
+
+    
+    <center>
+    <p> {{ latest_tweet.content }} </p>
+
+
+
+    </center>
+
+    </div>
+
+    {%  endif%}
+
+    {% endfor %}
+
+    </div>
+
+
+
+
+
+
 {% endblock %}
+
 

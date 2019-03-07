@@ -4,6 +4,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from .models import user_profile
 from home.forms import NewTweetForm
+from home.models import TwitterTweets
+
 import datetime
 
 
@@ -60,5 +62,6 @@ def delete_user_view(request):
 
 def user_profile_view(request):
     userprofile = user_profile.objects.get(user_name=request.user)
+    latest_tweets = TwitterTweets.objects.all().order_by('published')
     postform = NewTweetForm()
-    return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform})
+    return render(request, 'accounts/userprofile.html', {'userprofile': userprofile, 'postform': postform, 'latest_tweets': latest_tweets})
