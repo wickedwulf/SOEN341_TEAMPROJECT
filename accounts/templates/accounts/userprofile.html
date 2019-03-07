@@ -41,7 +41,16 @@
             LINE-HEIGHT: 10px;
         }
 
-
+        .pinned_boxed {
+            border: 2px solid black;
+            /* position: relative; */
+            margin: 0 0%;
+            margin-top: auto;
+            /* display: grid; */
+            grid-template-columns: 1fr;
+            /* grid-gap: 10px; */
+            grid-column-align: center;
+        }
 
     </style>
 
@@ -72,7 +81,8 @@
     </div>
 
     <div class="tweetinfo">
-        {% for latest_tweet in my_tweets %}
+        {% for my_tweets in tweets %}
+            {% if my_tweets.author_id == userprofile.user_profile_name %}
             <p style="white-space:nowrap;">
                 <span style="font-size: 172%;font-weight:bold; ">{{ userprofile.user_name }} </span>&nbsp;&nbsp;
                 <span style="font-size: larger; ">{{ userprofile.user_profile_name }}</span>
@@ -80,24 +90,46 @@
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                <span>{{ latest_tweet.published }}</span>
+                <span>{{ my_tweets.published }}</span>
 
             </p>
 
 
             <br>
             <center>
-                <p>{{ latest_tweet.content }}</p>
-                     <form class="site-form" action="/accounts/userprofile.html?delete={{ latest_tweet.tweet_id }}"
+                <p>{{ my_tweets.content }}</p>
+                     <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
                           method="post">
                         {% csrf_token %}
                         <input type="image" alt="submit" src="/static/delete.png" width="18" height="18">
                     </form>
             </center>
+            {% endif %}
         {% endfor %} <!--  needed to end for loop -->
     </div>
 
+    <div class="pinned">
+        <span style="font-size: 150%;font-weight:bold;float: right;padding-right:5%;display: grid;grid-column-align: center; ">Pinned Posts
 
+            {% for my_pinned_tweets in tweets %}
+                {% for pinned in pinned_posts %}
+                    {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == userprofile.user_profile_name %}
+                        <div class="pinned_boxed">
+                          <p><img src={{ userprofile.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
+                          <p>{{ my_pinned_tweets.content }}
+                          <p>Posted: {{ my_pinned_tweets.published }}
+                          <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
+                             {% csrf_token %}
+                              <div class="column">
+                                 <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Unpin Post">
+                              </div>
+                          </form>
+                         </div>
+                    {% endif %}
+                {% endfor %} <!--  needed to end for loop -->
+            {% endfor %} <!--  needed to end for loop -->
+        </span>
+    </div>
 
 
 {% endblock %}
