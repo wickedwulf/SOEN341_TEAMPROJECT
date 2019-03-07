@@ -63,7 +63,8 @@ def delete_user_view(request):
 
 def user_profile_view(request):
     if request.method == 'POST':
-        updated_form = forms.EditUserProfile(request.POST, request.FILES)  # get the data from the fields on the page
+        updated_form = forms.EditUserProfile(request.POST,
+                                             request.FILES)  # get the data from the fields on the page
         if updated_form.is_valid():  # check if the form is valid i.e right kind of data
             update_image_file = updated_form.save(commit=False)
             updatedb = user_profile.objects.get(user_name=request.user)
@@ -76,7 +77,8 @@ def user_profile_view(request):
             updatedb.user_phone = update_image_file.user_phone
             updatedb.user_email = update_image_file.user_email
             updatedb.save()
-        return redirect('accounts:user_profile_view')
+            return redirect('accounts:user_profile_view')
+
     else:
         userprofile = user_profile.objects.get(user_name=request.user)
         postform = NewTweetForm()
@@ -89,4 +91,19 @@ def user_profile_view(request):
         else:
             return render(request, 'accounts/userprofile.html',
                           {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile})
+    # delete from history
+    query = request.GET
+    if 'delete' in query.keys():
+        if request.method == 'POST':
+            try:
+                Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('delete'))).delete()
+            except Twitter_Tweet.DoesNotExist:
+                print("Ignoring does not exist error delete")
 
+        userprofile = user_profile.objects.get(user_name=request.user)
+        postform = NewTweetForm()
+        edituserprofile = forms.EditUserProfile()
+        my_tweets = Twitter_Tweet.objects.all().filter(author_id=userprofile.user_profile_name)
+        return render(request, 'accounts/userprofile.html',
+                      {'userprofile': userprofile, 'postform': postform, 'edituserprofile': edituserprofile,
+                       'my_tweets': my_tweets})

@@ -31,9 +31,14 @@
                                   method="post">
                                 {% csrf_token %}
                                 {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="18" height="18">
-
                             </form>
-
+                            {% if  userprofile.user_profile_name  == tweet.author_id %}
+                            <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
+                                  method="post">
+                                {% csrf_token %}
+                                <input type="image" alt="submit" src="/static/delete.png" width="18" height="18">
+                            </form>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %} <!--  needed to end for loop -->
