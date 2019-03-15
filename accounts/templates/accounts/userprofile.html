@@ -16,44 +16,48 @@
 
 
     <style>
-        /* Puts the profile information at the topleft of the page
-           Also puts a green border around the information
-        */
         .profilelocation {
             position: center;
             width: 400px;
             padding: 10px;
-            border: 3px solid green;
+            border: 3px;
             margin: 0;
-            position: fixed;
-            top: 140px;
-            left: 30px;
+            position: absolute;
+            top: 170px;
+            left: 80px;
+            background-color: #FAFAFA;
         }
 
         .tweetinfo {
             width: 900px;
             padding: 20px;
-            border: 3px solid black;
+            border: 1px;
             margin: 0;
             position: absolute;
-            top: 340;
+            top: 170px;
             left: 500px;
             LINE-HEIGHT: 10px;
+            background-color: #FAFAFA;
         }
 
-        .pinned_boxed {
-            border: 2px solid black;
-            /* position: relative; */
-            margin: 0 0%;
-            margin-top: auto;
-            /* display: grid; */
-            grid-template-columns: 1fr;
-            /* grid-gap: 10px; */
-            grid-column-align: center;
+        .pinned{
+            border: 1px solid black;
+            position: absolute;
+            right: 1050px;
+            top: 850px;
+            width: 400px;
+            padding: 10px;
+            border: 3px;
+            margin: 0;
         }
+
+
+        body{
+            background-color:#E8E8E8;
+        }
+
 
     </style>
-
     <div class="profilelocation">
         <center><h1>{{ userprofile.user_name }}</h1>
             <p><img src="{{ userprofile.user_profile_picture.url }}" width="150" height="150"></p>
@@ -83,21 +87,27 @@
     <div class="tweetinfo">
         {% for my_tweets in tweets %}
             {% if my_tweets.author_id == userprofile.user_profile_name %}
-            <p style="white-space:nowrap;">
+
+                <p style="white-space:nowrap;">
                 <span style="font-size: 172%;font-weight:bold; ">{{ userprofile.user_name }} </span>&nbsp;&nbsp;
                 <span style="font-size: larger; ">{{ userprofile.user_profile_name }}</span>
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                <span>{{ my_tweets.published }}</span>
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <span style="font-size: 100%;font-weight:bold; ">{{ my_tweets.published }} </span>
+                    <br>
+                    <br>
+                    <br>
+                    {{ my_tweets.content }}
+                </div>
 
-            </p>
-
+                 </p>
 
             <br>
             <center>
-                <p>{{ my_tweets.content }}</p>
+
                      <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
                           method="post">
                         {% csrf_token %}
@@ -109,12 +119,12 @@
     </div>
 
     <div class="pinned">
-        <span style="font-size: 150%;font-weight:bold;float: right;padding-right:5%;display: grid;grid-column-align: center; ">Pinned Posts
-
+            <h2>Pinned Posts</h2>
             {% for my_pinned_tweets in tweets %}
                 {% for pinned in pinned_posts %}
                     {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == userprofile.user_profile_name %}
                         <div class="pinned_boxed">
+                            <div class="shadow p-3 mb-5 bg-white rounded">
                           <p><img src={{ userprofile.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
                           <p>{{ my_pinned_tweets.content }}
                           <p>Posted: {{ my_pinned_tweets.published }}
@@ -125,10 +135,10 @@
                               </div>
                           </form>
                          </div>
+                        </div>
                     {% endif %}
                 {% endfor %} <!--  needed to end for loop -->
             {% endfor %} <!--  needed to end for loop -->
-        </span>
     </div>
 
 
