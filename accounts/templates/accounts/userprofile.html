@@ -22,9 +22,9 @@
             padding: 10px;
             border: 3px;
             margin: 0;
-            position: absolute;
-            top: 170px;
-            left: 80px;
+            position: relative;
+            bottom: 110px;
+            right: 500px;
             background-color: #FAFAFA;
         }
 
@@ -33,18 +33,18 @@
             padding: 20px;
             border: 1px;
             margin: 0;
-            position: absolute;
-            top: 170px;
-            left: 500px;
+            position: relative;
+            bottom: 765px;
+            right: 80px;
             LINE-HEIGHT: 10px;
             background-color: #FAFAFA;
         }
 
         .pinned{
             border: 1px solid black;
-            position: absolute;
-            right: 1050px;
-            top: 850px;
+            position: relative;
+            right: 500px;
+            bottom: 900px;
             width: 400px;
             padding: 10px;
             border: 3px;
@@ -58,6 +58,7 @@
 
 
     </style>
+    <div class = container>
     <div class="profilelocation">
         <center><h1>{{ userprofile.user_name }}</h1>
             <p><img src="{{ userprofile.user_profile_picture.url }}" width="150" height="150"></p>
@@ -139,6 +140,7 @@
                     {% endif %}
                 {% endfor %} <!--  needed to end for loop -->
             {% endfor %} <!--  needed to end for loop -->
+    </div>
     </div>
 
 
