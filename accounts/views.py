@@ -74,8 +74,7 @@ def user_profile_view(request):
             for update_my_mail in my_mail:
                 if blacklisted.blocked_user_id == update_my_mail.source_author_id:
                     update_my_mail.show_message = False
-                else:
-                    update_my_mail.show_message = True
+
 
     encrypt_key_form = forms.User_Encryption_Form()
     priv_msg_form = Private_Message_Form()
@@ -90,8 +89,7 @@ def user_profile_view(request):
             for update_tweet_list in tweets:
                 if blacklisted.blocked_user_id == update_tweet_list.author_id:
                     update_tweet_list.show_post = False
-                else:
-                    update_tweet_list.show_post = True
+
 
     # delete from history
     query = request.GET
@@ -231,8 +229,7 @@ def user_search_view(request):
             for update_my_mail in my_mail:
                 if blacklisted.blocked_user_id == update_my_mail.source_author_id:
                     update_my_mail.show_message = False
-                else:
-                    update_my_mail.show_message = True
+
     userprofile = user_profile.objects.all()
     priv_msg_form = Private_Message_Form()
     post_form = NewTweetForm()

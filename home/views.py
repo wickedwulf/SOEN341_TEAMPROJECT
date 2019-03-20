@@ -21,9 +21,6 @@ def homeactions(request):
           for update_tweet_list in latest_tweets:
               if blacklisted.blocked_user_id == update_tweet_list.author_id:
                   update_tweet_list.show_post = False
-              else:
-                  update_tweet_list.show_post = True
-
 
 
 
@@ -34,17 +31,13 @@ def homeactions(request):
           for update_my_mail in my_mail:
               if blacklisted.blocked_user_id == update_my_mail.source_author_id:
                   update_my_mail.show_message = False
-              else:
-                  update_my_mail.show_message = True
 
     # this makes encryption backend vs frontend
     encryption_key_list = user_encryption_key_list.objects.all()
     for encryption_keys in encryption_key_list:
         if encryption_keys.encrypt_list_owner == my_user_profile.user_profile_name:
             for update_tweet_list in latest_tweets:
-                if update_tweet_list.encrypt_content and encryption_keys.encryption_key != update_tweet_list.content_key:
-                    update_tweet_list.show_encrypted = True
-                else:
+                if update_tweet_list.encrypt_content and encryption_keys.encryption_key == update_tweet_list.content_key:
                     update_tweet_list.show_encrypted = False
 
 
