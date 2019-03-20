@@ -12,9 +12,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     {% load static i18n %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
@@ -25,9 +25,19 @@
     <nav class="navbar navbar-default sticky-top">
         <div class="navbar-nav mt-auto d-flex">
             <ul class="mx-auto text-center pl-0 ml-0">
-                <li>
+                <li> <!--  The following check needs to be done because some pages return arrays for userprofile and not a single profile-->
                     Logged in as: {{ user.get_username }}<br>
-                    Profile ID: {{ userprofile.user_profile_name }}
+                    {% if userprofile.user_profile_name != null %}
+                        Profile ID: {{ userprofile.user_profile_name }}
+                    {% else %}
+                        {% for name in userprofile %}
+                            {% if name.user_name == user.get_username %}
+                                Profile ID: {{ name.user_profile_name }}
+                            {% endif %}
+                        {% endfor %}
+
+                    {% endif %}
+
                 </li>
                 <li>
                     <form action="/accounts/userprofile.html?view">
@@ -55,33 +65,111 @@
                         <button type="submit" class="btn btn-success">Logout</button>
                     </form>
                 </li>
+                <li>
+                    <form class="search-user" method="GET" action="/accounts/search.html">
+                        <fieldset>
+                            <input type="text" name="search">
+                            <button type="submit" class="btn btn-success">search</button>
+                        </fieldset>
+                    </form>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PrivateMessage">
+                        Message
+                    </button>
+                </li>
+                <li>
+                    <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">
+                </li>
             </ul>
         </div>
     </nav>
 {% endif %}
 
-<!-- Modal -->
+<!-- Modal for writing a tweet -->
 <div id="TweetDialog" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Tweet Something</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
             </div>
             <div class="modal-body">
-                <form class="site-form" action="/home/home.html?action=tweet" method="post">
+                <!--  must have enctype param or we can't upload pictures -->
+                <form class="site-form" action="/home/home.html?action=tweet" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ postform }}
+                    {{ post_form }}
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-default" , value="post">
+                        <input type="submit" class="btn btn-default" , value="Post">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
         </div>
 
+    </div>
+</div>
+
+
+<!-- Modal for sending private messages -->
+<div id="PrivateMessage" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Message user</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--  must have enctype param or we can't upload pictures -->
+                <form class="site-form" action="/home/home.html?action=privatemsg" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ priv_msg_form }}
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-default" , value="Send">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal for reading private messages -->
+<div id="ReadMail" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content for showing private messages-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your Messages</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {% for mail in my_mail %}
+                    {% if mail.target_user_id == my_user_profile.user_profile_name and mail.show_message == True %}
+                        <p>Sent from: {{ mail.source_author_id }}
+                        <p>{{ mail.content }}
+                            <!--  attach our images to posts only if they are not the default -->
+                            {% if mail.media_attachment.name != 'default.png' %}
+                                <p> <img src={{ mail.media_attachment.url }} width="200" height="200">
+                            {% endif %}
+                        <p>Sent: {{ mail.sent_date }}
+                        <form class="site-form" action="/home/home.html?deleteprivatemsg={{ mail.private_message_id }}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="column">
+                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Message"></div>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 

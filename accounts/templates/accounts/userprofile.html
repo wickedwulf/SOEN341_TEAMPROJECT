@@ -55,55 +55,57 @@
     </style>
 
     <div class="profilelocation">
-        <center><h1>{{ userprofile.user_name }}</h1>
-            <p><img src="{{ userprofile.user_profile_picture.url }}" width="150" height="150"></p>
-            <form class="profilelocation_site-form" method="post" action="/accounts/userprofile/"
-                  enctype="multipart/form-data">
-                <!-- set the form type and method of posting as well as the target -->
-                {% csrf_token %}
-                <!-- We should always use this on pages that send data. security thing-->
-                <br>{{ edituserprofile.user_profile_picture }}</br>
-                <br>Profile Name: {{ userprofile.user_profile_name }}
-                <br>Password: Place holder
-                <br>Tweet Count: {{ userprofile.tweet_count }}
-                <br>Liked Count: {{ userprofile.liked_tweet_count }}
-                <br>Followers: {{ userprofile.follower_count }}
-                <br>First Name: {{ userprofile.user_first_name }}
-                <br>Last Name: {{ userprofile.user_last_name }}
-                <br>Email: {{ userprofile.user_email }}
-                <br>Phone #: {{ userprofile.user_phone }}
-                <br>Country: {{ userprofile.user_country }}
-                <br>Web Site: {{ userprofile.user_website  }}
-                <br>Joined: {{ userprofile.created_on }}
-                <br><input type="submit" , value="Save changes"></br>        <!-- does the submission action (it's a button) -->
+        <center><h1>{{ my_user_profile.user_name }}</h1>
+            <p><img src="{{ my_user_profile.user_profile_picture.url }}" width="150" height="150"></p>
+            <!-- We should always use this on pages that send data. security thing-->
+            <br>Profile Name: {{ my_user_profile.user_profile_name }}
+            <br>Password: Place holder
+            <br>Tweet Count: {{ my_user_profile.tweet_count }}
+            <br>Liked Count: {{ my_user_profile.liked_tweet_count }}
+            <br>Followers: {{ my_user_profile.follower_count }}
+            <br>First Name: {{ my_user_profile.user_first_name }}
+            <br>Last Name: {{ my_user_profile.user_last_name }}
+            <br>Email: {{ my_user_profile.user_email }}
+            <br>Phone #: {{ my_user_profile.user_phone }}
+            <br>Country: {{ my_user_profile.user_country }}
+            <br>Web Site: {{ my_user_profile.user_website }}
+            <br>Joined: {{ my_user_profile.created_on }}
+            <br><input type="button" data-toggle="modal" data-target="#EditUserProfile" , value="Edit Profile">       <!-- does the submission action (it's a button) -->
+            <input type="button" data-toggle="modal" data-target="#InputEncryptionKeys" , value="Encryption keys"></br>
             </form>
         </center>
     </div>
 
     <div class="tweetinfo">
         {% for my_tweets in tweets %}
-            {% if my_tweets.author_id == userprofile.user_profile_name %}
-            <p style="white-space:nowrap;">
-                <span style="font-size: 172%;font-weight:bold; ">{{ userprofile.user_name }} </span>&nbsp;&nbsp;
-                <span style="font-size: larger; ">{{ userprofile.user_profile_name }}</span>
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                <span>{{ my_tweets.published }}</span>
+            {% if my_tweets.author_id == my_user_profile.user_profile_name %}
+                <p style="white-space:nowrap;">
+                    <span style="font-size: 172%;font-weight:bold; ">{{ my_user_profile.user_name }} </span>&nbsp;&nbsp;
+                    <span style="font-size: larger; ">{{ my_user_profile.user_profile_name }}</span>
+                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                    <span>{{ my_tweets.published }}</span>
 
-            </p>
+                </p>
 
 
-            <br>
-            <center>
-                <p>{{ my_tweets.content }}</p>
-                     <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
+                <br>
+                <center>
+                    <p>{{ my_tweets.content }}</p>
+
+                    <!--  Only display image if it's not the default.png -->
+                    {% if my_tweets.media_attachment.name != 'default.png' %}
+                        <p> <img src={{ my_tweets.media_attachment.url }} width="200" height="200">
+                    {% endif %}
+                    <!--  end display image -->
+                    <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
                           method="post">
                         {% csrf_token %}
                         <input type="image" alt="submit" src="/static/delete.png" width="18" height="18">
                     </form>
-            </center>
+                </center>
             {% endif %}
         {% endfor %} <!--  needed to end for loop -->
     </div>
@@ -113,10 +115,14 @@
 
             {% for my_pinned_tweets in tweets %}
                 {% for pinned in pinned_posts %}
-                    {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == userprofile.user_profile_name %}
+                    {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == my_user_profile.user_profile_name %}
                         <div class="pinned_boxed">
-                          <p><img src={{ userprofile.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
-                          <p>{{ my_pinned_tweets.content }}
+                        {% for pinned_user in userprofile %} <!-- Needs to be loop through all users to find the correct profile picture -->
+                            {% if pinned_user.user_profile_name == my_pinned_tweets.author_id %}
+                                <p><img src={{ pinned_user.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
+                            {% endif %}
+                        {% endfor %}
+                            <p>{{ my_pinned_tweets.content }}
                           <p>Posted: {{ my_pinned_tweets.published }}
                           <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
                              {% csrf_token %}
@@ -132,6 +138,70 @@
     </div>
 
 
+    <!-- Modal -->
+    <div id="EditUserProfile" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Profile</h4>
+                </div>
+                <div class="modal-body">
+                    <!--  must have enctype param or we can't upload pictures -->
+                    <form class="site-form" action="/accounts/userprofile.html?update" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <br>Change Profile Picture
+                        <br>{{ edituserprofile.user_profile_picture }}</br>
+                        <br>Password: Place holder
+                        <br>First Name: {{ edituserprofile.user_first_name }}
+                        <br>Last Name: {{ edituserprofile.user_last_name }}
+                        <br>Email: {{ edituserprofile.user_email }}
+                        <br>Phone #: {{ edituserprofile.user_phone }}
+                        <br>Country: {{ edituserprofile.user_country }}
+                        <br>Web Site: {{ edituserprofile.user_website }}
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" , value="Apply">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="InputEncryptionKeys" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add/Remove Keys</h4>
+                </div>
+                <div class="modal-body">
+                    {% for keys_list in key_listing %}
+                        {% if keys_list.encrypt_list_owner == my_user_profile.user_profile_name %}
+                            <form class="site-form" action="/accounts/userprofile.html?deletekey={{ keys_list.key_id }}" method="post">
+                                {% csrf_token %}
+                                <p>{{ keys_list.user_profile_name }}, {{ keys_list.encryption_key }}, {{ keys_list.enc_keys_notes }}
+                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Key"></p>
+                            </form>
+                        {% endif %}
+                    {% endfor %}
+                    <form class="site-form" action="/accounts/userprofile.html?newkeys" method="post">
+                        {% csrf_token %}
+                        {{ encrypt_key_form }}
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" , value="Add">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

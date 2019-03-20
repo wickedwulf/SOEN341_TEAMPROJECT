@@ -1,0 +1,50 @@
+{% extends 'basic_style_layout.html' %}   <!-- this is located in the main templates folder-->
+{% block content %}
+
+
+
+    <br>
+    <br>
+    <br>
+
+    {% if user.is_authenticated %}
+
+        {% if searched_profile.user_name != null %}
+            <div class="search-profile-location">
+                <center><h1>{{ searched_profile.user_name }}</h1>
+                    <p><img src="{{ searched_profile.user_profile_picture.url }}" width="150" height="150"></p>
+                    <!-- We should always use this on pages that send data. security thing-->
+                    <br>Profile Name: {{ searched_profile.user_profile_name }}
+                    <br>Password: Place holder
+                    <br>Tweet Count: {{ searched_profile.tweet_count }}
+                    <br>Liked Count: {{ searched_profile.liked_tweet_count }}
+                    <br>Followers: {{ searched_profile.follower_count }}
+                    <br>First Name: {{ searched_profile.user_first_name }}
+                    <br>Last Name: {{ searched_profile.user_last_name }}
+                    <br>Email: {{ searched_profile.user_email }}
+                    <br>Phone #: {{ searched_profile.user_phone }}
+                    <br>Country: {{ searched_profile.user_country }}
+                    <br>Web Site: {{ searched_profile.user_website }}
+                    <br>Joined: {{ searched_profile.created_on }}
+                </center>
+            </div>
+        {% else %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <center>{{ Not_Found }}</center>
+
+        {% endif %}
+
+    {% endif %}
+
+
+
+
+
+
+
+{% endblock %}
+
+
