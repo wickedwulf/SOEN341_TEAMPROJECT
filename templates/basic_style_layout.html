@@ -22,7 +22,7 @@
 
 <!-- navigation bar that is always on screen -->
 {% if user.is_authenticated %}
-    <nav class="navbar navbar-default sticky-top">
+    <nav class="navbar navbar-default fixed">
         <div class="navbar-nav mt-auto d-flex">
             <ul class="mx-auto text-center pl-0 ml-0">
                 <li> <!--  The following check needs to be done because some pages return arrays for userprofile and not a single profile-->

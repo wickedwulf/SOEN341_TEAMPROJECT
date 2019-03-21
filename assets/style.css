@@ -108,13 +108,13 @@ nav form{
 .navbar-default{
     height: 120px;
     padding: 0px;
-    background-color: indianred;
+    background-color: azure;
 
 }
 .navbar-nav{
     width: 100%;
     height: 75px;
-    background-color: lightgreen;
+    background-color: azure;
 }
 .navbar-brand{
     position:absolute;
