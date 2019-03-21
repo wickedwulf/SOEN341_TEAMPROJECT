@@ -28,11 +28,10 @@
             position: relative;
             bottom: 753px;
             right: 80px;
-            LINE-HEIGHT: 10px;
             background-color: #FAFAFA;
         }
         .pinned{
-            border: 1px solid black;
+            border: 1px;
             position: absolute;
             right: 495px;
             top: 500px;
@@ -98,25 +97,37 @@
                     <div class="shadow p-3 mb-5 bg-white rounded">
                     <span>{{ my_tweets.published }}</span>
 
+
                         <br>
                         <br>
+                        <h5> {{ my_tweets.content }} </h5>
+
                         <br>
-                        {{ my_tweets.content }}
-                    </div>
+                        <br>
+
+
                     <!--  Only display image if it's not the default.png -->
                     {% if my_tweets.media_attachment.name != 'default.png' %}
                         <p> <img src={{ my_tweets.media_attachment.url }} width="200" height="200">
                     {% endif %}
                     <!--  end display image -->
 
-                <center>
-                    <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
-                          method="post">
-                        {% csrf_token %}
-                        <input type="image" alt="submit" src="/static/delete.png" width="18" height="18">
-                    </form>
 
-                </center>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+
+                            <form class="site-form" action="/accounts/userprofile.html?delete={{ my_tweets.tweet_id }}"
+                                method="post">
+                                {% csrf_token %}
+                                <input type="image" alt="submit" src="/static/delete.png" width="18" height="18">
+                            </form>
+
+                        </ul>
+                    </div>
+                </div>
+
 
             {% endif %}
         {% endfor %} <!--  needed to end for loop -->
@@ -135,8 +146,9 @@
                                 <p><img src={{ pinned_user.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
                             {% endif %}
                         {% endfor %}
-                            <p>{{ my_pinned_tweets.content }}
-                            <h4>Posted: {{ my_pinned_tweets.published }}</h4>
+
+                            <h2>{{ my_pinned_tweets.content }}</h2>
+                            <h6>Posted: {{ my_pinned_tweets.published }}</h6>
                           <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
                              {% csrf_token %}
                               <div class="column">
