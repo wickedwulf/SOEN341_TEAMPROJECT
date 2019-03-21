@@ -27,7 +27,7 @@
                 max-width: 1000px;
                 margin: auto;
                 padding: 30px 0px;
-                border-bottom: 1px solid #999;
+                border-bottom: 1px;
                 color: #333;
             }
             main section {
@@ -40,17 +40,45 @@
                 float: left;
                 width: 15%;
             }
+            .latest_tweets{
+                width: 900px;
+                padding: 50px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                bottom: 15px;
+                right: 400px;
+                background-color: #E8E8E8;
+            }
+
+            .followed_tweets{
+                width: 900px;
+                padding: 20px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                top: 20px;
+                right: 50px;
+                background-color: #FAFAFA;
+            }
+
+
+            body{
+                background-color:#E8E8E8;
+            }
         </style>
 
 
         <section id="pageContent">
             <main role="main">
+            <div class = container>
                 <div class="latest_tweets">
+                    <h2>Latest Tweets</h2>
                     {% for tweet in latest_tweets %}
                         {% if tweet.show_post == True %}
                             <!--  Creates a python foreach type loop that enumerates all object data -->
                             <div class="latest_tweet">           <!--  single object data -->
-                                <div class="boxed">
+                                    <div class="shadow p-3 mb-5 bg-white rounded">
                                     {% for img in userprofile %}
                                         {% if img.user_profile_name == tweet.author_id %}
                                             <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
@@ -70,13 +98,22 @@
                                         Posted: {{ tweet.published }}
                                         <br><input type="image" src="/static/reply.png" width="20" height="20" title="Reply to tweet" data-toggle="modal"
                                                    data-target="#ReplyToTweet">
-                                        <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+
+                                        <br>
+
+                                     <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}
                                               method="post">
                                             {% csrf_token %}
                                             <div class="column">
                                                 {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
                                             </div>
                                         </form>
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+
                                         <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
                                               method="post">
                                             {% csrf_token %}
@@ -105,23 +142,26 @@
                                             <div class="column">
                                                 <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
                                         </form>
+                                        </ul>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %} <!--  needed to end for loop -->
+                    </div>
             </main>
             <aside>
                 <div>
                     <center><p>
                         <h1>Following</h1></center>
                     <div class="followed_tweets">
+                            <div class="shadow p-3 mb-5 bg-white rounded"> <!-- need fixing -->
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
                                 {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
                                     <!--  Creates a python foreach type loop that enumerates all object data -->
                                     <div class="followed_tweet">           <!--  single object data -->
-                                        <div class="boxed">
                                             {% for img in userprofile %}
                                                 {% if img.user_profile_name == tweet.author_id %}
                                                     <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
@@ -135,7 +175,13 @@
                                                 {% csrf_token %}
                                                 <div class="column">
                                                     <input type="image" alt="submit" src="/static/unfollow.svg" width="20" height="20" title="Follow Poster"></div>
+
+
                                             </form>
+
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 {% endif %}
