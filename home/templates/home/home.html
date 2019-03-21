@@ -57,7 +57,7 @@
                 border: 1px;
                 margin: 0;
                 position: relative;
-                bottom: 5px;
+                top: 15px;
                 right: 100px;
                 background-color: #E8E8E8;
             }
@@ -153,9 +153,10 @@
             </main>
             <aside>
                 <div>
-                    <center><p>
-                        <h1>Following</h1></center>
+
+
                     <div class="followed_tweets">
+                         <h2>Following</h2>
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
                                 {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
