@@ -41,24 +41,24 @@
                 width: 15%;
             }
             .latest_tweets{
-                width: 900px;
+                width: 700px;
                 padding: 50px;
                 border: 1px;
                 margin: 0;
                 position: relative;
                 bottom: 15px;
-                right: 400px;
+                right: 300px;
                 background-color: #E8E8E8;
             }
 
             .followed_tweets{
-                width: 900px;
+                width: 700px;
                 padding: 20px;
                 border: 1px;
                 margin: 0;
                 position: relative;
                 top: 15px;
-                right: 100px;
+                right: 200px;
                 background-color: #E8E8E8;
             }
 
@@ -171,11 +171,30 @@
                                             {% endfor %}
 
                                             <!--  fields found in models.py used for displaying our data -->
-                                            <div class="shadow p-3 mb-5 bg-white rounded">
+                                            
                                                 {{ tweet.content }}
                                                 <br>
                                                 Posted: {{ tweet.published }}
-                                            <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
+
+                                                <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+
+                                        <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <div class="column">
+                                                <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
+                                        </form>
+                                        <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <div class="column">
+                                                <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
+                                        </form>
+
+                                             <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
                                                   method="post">
                                                 {% csrf_token %}
                                                 <div class="column">
@@ -183,6 +202,10 @@
 
 
                                             </form>
+
+
+                                        </ul>
+
 
 
 
