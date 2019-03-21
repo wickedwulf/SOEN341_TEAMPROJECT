@@ -156,13 +156,12 @@
                     <center><p>
                         <h1>Following</h1></center>
                     <div class="followed_tweets">
-
+                            <div class="shadow p-3 mb-5 bg-white rounded"> <!-- need fixing -->
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
                                 {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
                                     <!--  Creates a python foreach type loop that enumerates all object data -->
                                     <div class="followed_tweet">           <!--  single object data -->
-
                                             {% for img in userprofile %}
                                                 {% if img.user_profile_name == tweet.author_id %}
                                                     <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
