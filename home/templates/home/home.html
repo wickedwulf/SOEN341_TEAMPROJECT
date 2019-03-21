@@ -130,11 +130,15 @@
                     <div class="followed_tweets">
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
-                                {% if tweet.author_id == followed.followed_user and followed.liked_by_user == userprofile.user_profile_name %}
+                                {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
                                     <!--  Creates a python foreach type loop that enumerates all object data -->
                                     <div class="followed_tweet">           <!--  single object data -->
                                         <div class="boxed">
-                                            <p><img src={{ userprofile.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
+                                            {% for img in userprofile %}
+                                                {% if img.user_profile_name == tweet.author_id %}
+                                                    <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
+                                                {% endif %}
+                                            {% endfor %}
                                             <!--  fields found in models.py used for displaying our data -->
                                             <p>{{ tweet.content }}
                                                 Posted: {{ tweet.published }}

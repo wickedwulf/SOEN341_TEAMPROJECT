@@ -6,31 +6,28 @@ from accounts.models import user_profile, user_encryption_key_list
 import hashlib
 import random
 import os
-import copy
 
 
 def homeactions(request):
     my_user_profile = user_profile.objects.get(user_name=request.user)
 
     blocked_list = Blocked_Users.objects.all()
-    latest_tweets = Twitter_Tweet.objects.all().order_by('published').reverse() #used to apply  blocking feature
+    latest_tweets = Twitter_Tweet.objects.all().order_by('published').reverse()  # used to apply  blocking feature
 
     # this code loops runs through our blocked list and sets show flag to false on any tweets that are by a blocked user x (filtered with if in html)
     for blacklisted in blocked_list:
-      if blacklisted.blocked_by == my_user_profile.user_profile_name:
-          for update_tweet_list in latest_tweets:
-              if blacklisted.blocked_user_id == update_tweet_list.author_id:
-                  update_tweet_list.show_post = False
-
-
+        if blacklisted.blocked_by == my_user_profile.user_profile_name:
+            for update_tweet_list in latest_tweets:
+                if blacklisted.blocked_user_id == update_tweet_list.author_id:
+                    update_tweet_list.show_post = False
 
     # this code filters our blocked people from private  messages
     my_mail = Private_Message.objects.all()
     for blacklisted in blocked_list:
-      if blacklisted.blocked_by == my_user_profile.user_profile_name:
-          for update_my_mail in my_mail:
-              if blacklisted.blocked_user_id == update_my_mail.source_author_id:
-                  update_my_mail.show_message = False
+        if blacklisted.blocked_by == my_user_profile.user_profile_name:
+            for update_my_mail in my_mail:
+                if blacklisted.blocked_user_id == update_my_mail.source_author_id:
+                    update_my_mail.show_message = False
 
     # this makes encryption backend vs frontend
     encryption_key_list = user_encryption_key_list.objects.all()
@@ -39,8 +36,6 @@ def homeactions(request):
             for update_tweet_list in latest_tweets:
                 if update_tweet_list.encrypt_content and encryption_keys.encryption_key == update_tweet_list.content_key:
                     update_tweet_list.show_encrypted = False
-
-
 
     userprofile = user_profile.objects.all()
     priv_msg_form = forms.Private_Message_Form()
@@ -61,7 +56,7 @@ def homeactions(request):
                     user_profile_tmp.save()  # save updated count
                     new_form.author_id = user_profile_name.user_profile_name  # set the author id
                     new_form.tweet_id = hashlib.sha1(new_form.content.encode('utf-8') + new_form.author_id.encode('utf-8')).hexdigest()
-                    new_form.encrypted_content = emoji_encrypt(random.randint(10, len(new_form.content)))
+                    new_form.encrypted_content = emoji_encrypt(random.randint(10, 140))
                     if new_form.encrypt_content:
                         new_form.show_encrypted = True
                     new_form.save()  # save updated tweet to db
@@ -81,7 +76,7 @@ def homeactions(request):
 
 
 
-  # this handles deleting the private messages and removing any attached pictures
+    # this handles deleting the private messages and removing any attached pictures
     elif 'deleteprivatemsg' in query.keys():
         if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
             try:
@@ -91,10 +86,7 @@ def homeactions(request):
                 priv_msg_delete.delete()
             except Private_Message.DoesNotExist:
                 print("Could not find private message")
-            my_user_profile = user_profile.objects.get(user_name=request.user)
-            return render(request, 'home/home.html',
-                          {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                           'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+            return redirect('home:home_actions')
 
         return HttpResponse('somethings wrong - check homeactions code in home/views.py file')
 
@@ -113,10 +105,7 @@ def homeactions(request):
                 user_profile_tmp.save()
                 like_tweet.favourites = like_tweet.favourites - 1
                 like_tweet.save()
-                my_user_profile = user_profile.objects.get(user_name=request.user)
-                return render(request, 'home/home.html',
-                              {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                               'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+                return redirect('home:home_actions')
             except Liked_Tweets.DoesNotExist:
                 print("Does not exist so creating it. Liked Post")
                 user_profile_tmp = user_profile.objects.get(user_name=request.user)
@@ -129,10 +118,7 @@ def homeactions(request):
                 like_add.save()
                 user_profile_tmp.save()
                 like_tweet.save()
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        return render(request, 'home/home.html',
-                      {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                       'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+        return redirect('home:home_actions')
 
     elif 'delete' in query.keys():
         if request.method == 'POST':
@@ -146,10 +132,7 @@ def homeactions(request):
                 user_profile_tmp.save()
             except Twitter_Tweet.DoesNotExist:
                 print("Ignoring does not exist error delete")
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        return render(request, 'home/home.html',
-                      {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                       'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+        return redirect('home:home_actions')
 
     elif 'follow' in query.keys():
         if request.method == 'POST':
@@ -160,11 +143,7 @@ def homeactions(request):
                 follow_profile.follower_count = follow_profile.follower_count + 1
                 follow_profile.save()
                 print("deleted like from tweet")
-                my_user_profile = user_profile.objects.get(user_name=request.user)
-                return render(request, 'home/home.html',
-                              {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                               'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-
+                return redirect('home:home_actions')
             except Following_Users.DoesNotExist:
                 print("Does not exist so create it. Now following user")
                 user_profile_tmp = user_profile.objects.get(user_name=request.user)
@@ -175,10 +154,7 @@ def homeactions(request):
                 follow_profile = user_profile.objects.get(user_profile_name="{}".format(query.get('follow')))
                 follow_profile.follower_count = follow_profile.follower_count + 1
                 follow_profile.save()
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        return render(request, 'home/home.html',
-                      {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                       'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+        return redirect('home:home_actions')
 
     # pin the post by storing the id of the post and the user that pinned it
     elif 'pin' in query.keys():
@@ -194,30 +170,19 @@ def homeactions(request):
                 pin.tweet_id = "{}".format(query.get('pin'))
                 pin.pinned_by_user = user_profile_tmp.user_profile_name
                 pin.save()
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        return render(request, 'home/home.html',
-                      {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                       'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+        return redirect('home:home_actions')
 
 
     # block a user so we can't see them
     elif 'block' in query.keys():
         if request.method == 'POST':
-            try:  # used to delete a blocked user from db
-                user_profile_tmp = user_profile.objects.get(user_name=request.user)
-                Blocked_Users.objects.get(blocked_user_id="{}".format(query.get('block')), blocked_by=user_profile_tmp.user_profile_name).delete()
-                print("Removing block")
-            except Blocked_Users.DoesNotExist:
-                print("Does not exist so create it. User has been blocked")
-                user_profile_tmp = user_profile.objects.get(user_name=request.user)
-                block = Blocked_Users()
-                block.blocked_user_id = "{}".format(query.get('block'))
-                block.blocked_by = user_profile_tmp.user_profile_name
-                block.save()
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        return render(request, 'home/home.html',
-                      {'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets, 'following': following,
-                       'blocked_list': blocked_list, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+            user_profile_tmp = user_profile.objects.get(user_name=request.user)
+            block = Blocked_Users()
+            block.blocked_user_id = "{}".format(query.get('block'))
+            block.blocked_by = user_profile_tmp.user_profile_name
+            block.block_id = hashlib.sha1(block.blocked_by.encode('utf-8') + block.blocked_user_id.encode('utf-8')).hexdigest()
+            block.save()
+        return redirect('home:home_actions')
 
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
     else:
@@ -228,7 +193,6 @@ def homeactions(request):
                        'blocked_list': blocked_list,
                        'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
-
 
 
 def emoji_encrypt(len):

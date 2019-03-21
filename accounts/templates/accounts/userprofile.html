@@ -71,7 +71,9 @@
             <br>Web Site: {{ my_user_profile.user_website }}
             <br>Joined: {{ my_user_profile.created_on }}
             <br><input type="button" data-toggle="modal" data-target="#EditUserProfile" , value="Edit Profile">       <!-- does the submission action (it's a button) -->
-            <input type="button" data-toggle="modal" data-target="#InputEncryptionKeys" , value="Encryption keys"></br>
+            <input type="button" data-toggle="modal" data-target="#InputEncryptionKeys" , value="Encryption keys">
+            <input type="button" data-toggle="modal" data-target="#BlockedUserList" , value="Blocked user list">
+            </br>
             </form>
         </center>
     </div>
@@ -170,7 +172,7 @@
             </div>
         </div>
     </div>
-
+    <!-- Modal for inputting new encryption keys, and deleting old ones -->
     <div id="InputEncryptionKeys" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -186,7 +188,7 @@
                             <form class="site-form" action="/accounts/userprofile.html?deletekey={{ keys_list.key_id }}" method="post">
                                 {% csrf_token %}
                                 <p>{{ keys_list.user_profile_name }}, {{ keys_list.encryption_key }}, {{ keys_list.enc_keys_notes }}
-                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Key"></p>
+                                    <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Key"></p>
                             </form>
                         {% endif %}
                     {% endfor %}
@@ -202,6 +204,33 @@
             </div>
         </div>
     </div>
+
+    <div id="BlockedUserList" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Blocked user list</h4>
+                </div>
+                <div class="modal-body">
+                    {% for block in blocked_list %}
+                        {% if block.blocked_by == my_user_profile.user_profile_name %}
+                            <form class="site-form" action="/accounts/userprofile.html?deleteblockeduser={{ block.block_id }}" method="post">
+                                {% csrf_token %}
+                                <p>User: {{ block.blocked_user_id }}, blocked on: {{ block.block_date }}
+                                    <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Block"></p>
+                            </form>
+                        {% endif %}
+                    {% endfor %}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
 
 

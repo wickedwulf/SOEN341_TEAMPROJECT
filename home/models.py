@@ -16,6 +16,7 @@ class Twitter_Tweet(models.Model):
     show_post = models.BooleanField(default=True)
     show_encrypted = models.BooleanField(default=False)
 
+
 class Liked_Tweets(models.Model):
     author_id = models.CharField(max_length=255, blank=True)
     tweet_id = models.CharField(max_length=255, blank=True)
@@ -50,6 +51,9 @@ class Private_Message(models.Model):
     seen = models.BooleanField(default=False)
     show_message = models.BooleanField(default=True)
 
+
 class Blocked_Users(models.Model):
     blocked_user_id = models.CharField(max_length=255, blank=True)
     blocked_by = models.CharField(max_length=255, blank=True)
+    block_id = models.CharField(max_length=255, blank=True)
+    block_date = models.DateTimeField(default=timezone.now)

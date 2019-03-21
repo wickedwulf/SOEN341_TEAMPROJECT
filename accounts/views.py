@@ -75,7 +75,6 @@ def user_profile_view(request):
                 if blacklisted.blocked_user_id == update_my_mail.source_author_id:
                     update_my_mail.show_message = False
 
-
     encrypt_key_form = forms.User_Encryption_Form()
     priv_msg_form = Private_Message_Form()
     pinned = Pinned_Posts.objects.all()
@@ -90,7 +89,6 @@ def user_profile_view(request):
                 if blacklisted.blocked_user_id == update_tweet_list.author_id:
                     update_tweet_list.show_post = False
 
-
     # delete from history
     query = request.GET
     if 'delete' in query.keys():
@@ -100,13 +98,7 @@ def user_profile_view(request):
             except Twitter_Tweet.DoesNotExist:
                 print("Ignoring does not exist error delete")
 
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        edituserprofile = forms.EditUserProfile(user=request.user)
-        return render(request, 'accounts/userprofile.html',
-                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                       'edituserprofile': edituserprofile, 'tweets': tweets,
-                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-
+        return redirect('accounts:user_profile_view')
 
 
     elif 'update' in query.keys():
@@ -115,9 +107,11 @@ def user_profile_view(request):
             if updated_form.is_valid():  # check if the form is valid i.e right kind of data
                 update_profile = updated_form.save(commit=False)
                 updatedb = user_profile.objects.get(user_name=request.user)
-                if update_profile.user_profile_picture != 'default_user.png':  # If the image is not default delete old one otherwise leave current
+                if my_user_profile.user_profile_picture != 'default_user.png' and my_user_profile.user_profile_picture != update_profile.user_profile_picture:  # If the image is not default delete old one otherwise leave current
                     delete_old_profile_pictures(updatedb.user_profile_picture)
+                elif update_profile.user_profile_picture != 'default_user.png':
                     updatedb.user_profile_picture = update_profile.user_profile_picture
+
                 updatedb.user_first_name = update_profile.user_first_name
                 updatedb.user_last_name = update_profile.user_last_name
                 updatedb.user_website = update_profile.user_website
@@ -127,34 +121,9 @@ def user_profile_view(request):
                 updatedb.user_email = update_profile.user_email
                 updatedb.save()
 
-                my_user_profile = user_profile.objects.get(user_name=request.user)
-                edituserprofile = forms.EditUserProfile(user=request.user)
-                if my_user_profile.tweet_count > 0:
-                    tweets = Twitter_Tweet.objects.all()
-                    return render(request, 'accounts/userprofile.html',
-                                  {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                                   'post_form': post_form, 'edituserprofile': edituserprofile, 'tweets': tweets,
-                                   'pinned_posts': pinned,
-                                   'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-                else:
-                    return render(request, 'accounts/userprofile.html',
-                                  {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                                   'post_form': post_form, 'edituserprofile': edituserprofile,
-                                   'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+                return redirect('accounts:user_profile_view')
             else:
-                my_user_profile = user_profile.objects.get(user_name=request.user)
-                edituserprofile = forms.EditUserProfile(user=request.user)
-                if my_user_profile.tweet_count > 0:
-                    tweets = Twitter_Tweet.objects.all()
-                    return render(request, 'accounts/userprofile.html',
-                                  {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                                   'post_form': post_form, 'edituserprofile': edituserprofile, 'tweets': tweets,
-                                   'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-                else:
-                    return render(request, 'accounts/userprofile.html',
-                                  {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                                   'post_form': post_form, 'edituserprofile': edituserprofile,
-                                   'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+                return redirect('accounts:user_profile_view')
     # pin the post by storing the id of the post and the user that pinned it
 
     elif 'pin' in query.keys():
@@ -165,12 +134,7 @@ def user_profile_view(request):
             except Pinned_Posts.DoesNotExist:
                 print("Ignoring does not exist error delete")
 
-        edituserprofile = forms.EditUserProfile(user=request.user)
-        return render(request, 'accounts/userprofile.html',
-                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                       'edituserprofile': edituserprofile, 'tweets': tweets,
-                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-
+        return redirect('accounts:user_profile_view')
 
     elif 'newkeys' in query.keys():
         if request.method == 'POST':
@@ -180,12 +144,8 @@ def user_profile_view(request):
                 new_key_form.key_id = hashlib.sha1(new_key_form.encryption_key.encode('utf-8') + new_key_form.user_profile_name.encode('utf-8')).hexdigest()
                 new_key_form.encrypt_list_owner = my_user_profile.user_profile_name
                 new_key_form.save()
-        edituserprofile = forms.EditUserProfile(user=request.user)
-        return render(request, 'accounts/userprofile.html',
-                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                       'edituserprofile': edituserprofile, 'tweets': tweets,
-                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
 
+        return redirect('accounts:user_profile_view')
 
     elif 'deletekey' in query.keys():
         if request.method == 'POST':
@@ -195,13 +155,20 @@ def user_profile_view(request):
             except user_encryption_key_list.DoesNotExist:
                 print("was not able to delete the key")
 
-        edituserprofile = forms.EditUserProfile(user=request.user)
-        return render(request, 'accounts/userprofile.html',
-                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                       'post_form': post_form,
-                       'edituserprofile': edituserprofile, 'tweets': tweets,
-                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+        return redirect('accounts:user_profile_view')
 
+    # delete blocked user from block list
+    elif 'deleteblockeduser' in query.keys():
+        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
+            try:
+                blocked_user = Blocked_Users.objects.get(block_id="{}".format(query.get('deleteblockeduser')))
+                blocked_user.delete()
+            except Blocked_Users.DoesNotExist:
+                print("Could not delete blocked user")
+
+        return redirect('accounts:user_profile_view')
+
+    # delete users post
     elif 'delete' in query.keys():
         if request.method == 'POST':
             try:
@@ -211,12 +178,7 @@ def user_profile_view(request):
                 my_user_profile.save()
             except Twitter_Tweet.DoesNotExist:
                 print("Ignoring does not exist error delete")
-        edituserprofile = forms.EditUserProfile(user=request.user)
-        return render(request, 'accounts/userprofile.html',
-                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                       'edituserprofile': edituserprofile, 'tweets': tweets,
-                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-
+        return redirect('accounts:user_profile_view')
 
     else:
         my_user_profile = user_profile.objects.get(user_name=request.user)
@@ -224,14 +186,14 @@ def user_profile_view(request):
         if my_user_profile.tweet_count > 0:
             tweets = Twitter_Tweet.objects.all()
             return render(request, 'accounts/userprofile.html',
-                          {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
+                          {'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile,
+                           'userprofile': userprofile, 'post_form': post_form,
                            'edituserprofile': edituserprofile, 'tweets': tweets,
                            'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
         else:
             return render(request, 'accounts/userprofile.html',
-                          {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'userprofile': userprofile, 'post_form': post_form, 'edituserprofile': edituserprofile,
-                           'pinned_posts': pinned, 'priv_msg_form': priv_msg_form,
-                           'my_mail': my_mail})
+                          {'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'userprofile': userprofile, 'post_form': post_form,
+                           'edituserprofile': edituserprofile, 'my_user_profile': my_user_profile, 'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
 
 
 def user_search_view(request):
@@ -257,30 +219,21 @@ def user_search_view(request):
                 my_user_profile = user_profile.objects.get(user_name=request.user)
                 searched_profile = user_profile.objects.get(user_profile_name="{}".format(query.get('search')))
                 return render(request, 'accounts/search.html',
-                              {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
+                              {'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile,
+                               'userprofile': userprofile,
                                'post_form': post_form, 'searched_profile': searched_profile,
                                'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
             except user_profile.DoesNotExist:
                 Not_Found = "The user " + "{}".format(query.get('search')) + " was not found"
                 return render(request, 'accounts/search.html',
-                              {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
+                              {'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile,
+                               'userprofile': userprofile,
                                'post_form': post_form, 'priv_msg_form': priv_msg_form, 'Not_Found': Not_Found,
                                'my_mail': my_mail})
 
 
     else:
-        my_user_profile = user_profile.objects.get(user_name=request.user)
-        if my_user_profile.tweet_count > 0:
-            tweets = Twitter_Tweet.objects.all()
-            return render(request, 'accounts/userprofile.html',
-                          {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                           'tweets': tweets, 'pinned_posts': pinned,
-                           'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
-        else:
-            return render(request, 'accounts/userprofile.html',
-                          {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form,
-                           'pinned_posts': pinned, 'priv_msg_form': priv_msg_form,
-                           'my_mail': my_mail})
+        return redirect('accounts:user_profile_view')
 
 
 def delete_old_profile_pictures(file_name):
