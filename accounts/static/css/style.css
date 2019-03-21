@@ -1,5 +1,5 @@
 body {
-    background: #DA70D6;
+    background-color:#E8E8E8;
 }
 
 .login-page {
@@ -27,7 +27,7 @@ body {
 .form {
     position: relative;
     z-index: 1;
-    background: #DDA0DD;
+    background-color:#F8F8F8;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
