@@ -186,6 +186,22 @@ def user_profile_view(request):
                        'edituserprofile': edituserprofile, 'tweets': tweets,
                        'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
 
+
+    elif 'deletekey' in query.keys():
+        if request.method == 'POST':
+            try:
+                del_key_listing = user_encryption_key_list.objects.get(key_id="{}".format(query.get('deletekey')))
+                del_key_listing.delete()
+            except user_encryption_key_list.DoesNotExist:
+                print("was not able to delete the key")
+
+        edituserprofile = forms.EditUserProfile(user=request.user)
+        return render(request, 'accounts/userprofile.html',
+                      {'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
+                       'post_form': post_form,
+                       'edituserprofile': edituserprofile, 'tweets': tweets,
+                       'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
+
     elif 'delete' in query.keys():
         if request.method == 'POST':
             try:

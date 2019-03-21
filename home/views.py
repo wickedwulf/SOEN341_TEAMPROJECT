@@ -62,8 +62,8 @@ def homeactions(request):
                     new_form.author_id = user_profile_name.user_profile_name  # set the author id
                     new_form.tweet_id = hashlib.sha1(new_form.content.encode('utf-8') + new_form.author_id.encode('utf-8')).hexdigest()
                     new_form.encrypted_content = emoji_encrypt(random.randint(10, len(new_form.content)))
-                    if new_form.encrypt_content == True:
-                        new_form.show_encrypted == True
+                    if new_form.encrypt_content:
+                        new_form.show_encrypted = True
                     new_form.save()  # save updated tweet to db
                     return redirect('home:home_actions')  # send user to latest page to view their tweet
                 return HttpResponse('somethings wrong - check homeactions code in home/views.py file')
