@@ -54,6 +54,7 @@ ul#horizontal-list li {
     margin:  auto;
     position: relative;
 }
+
 .modal-dialog{
     max-width: fit-content;
     max-height: fit-content;
