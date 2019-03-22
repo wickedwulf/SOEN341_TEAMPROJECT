@@ -49,7 +49,7 @@ ul#horizontal-list li {
 .logout-link{
 }
 .container {
-    /*max-width: 40%;*/
+    max-width: 400px;
     /*background-color: #4A235A;*/
     /*float: left;*/
     width: 100%;
