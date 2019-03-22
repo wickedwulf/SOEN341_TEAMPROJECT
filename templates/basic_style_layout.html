@@ -39,48 +39,64 @@
                     {% endif %}
 
                 </li>
+
                 <li>
                     <form action="/accounts/userprofile.html?view">
                         <button type="submit" class="btn btn-success">Profile</button>
                     </form>
                 </li>
 
-                <li>
+
+                 <li>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#TweetDialog">
+                        Tweet
+                    </button>
+                </li>
+
+
+
                     <div class="navbar-brand">
-                        <form action="/home/">
+                        <form action="/home">
                             <button type="submit" class="logo-button">
                                 <img src="/static/soen341logo.png">
                             </button>
                         </form>
                     </div>
-                </li>
+
+
+
+
+
+
+
                 <li>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#TweetDialog">
-                        Tweet
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PrivateMessage">
+                        Message
                     </button>
+                    <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">
                 </li>
+
+
+
+
+
+
                 <li>
                     <form class="logout-link" action="/accounts/logout/" method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success">Logout</button>
                     </form>
                 </li>
-                <li>
-                    <form class="search-user" method="GET" action="/accounts/search.html">
-                        <fieldset>
-                            <input type="text" name="search">
-                            <button type="submit" class="btn btn-success">search</button>
-                        </fieldset>
+
+
+                        <li>
+                <form class="search-user" method="GET" action="/accounts/search.html">
                     </form>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PrivateMessage">
-                        Message
-                    </button>
-                </li>
-                <li>
-                    <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">
-                </li>
+                <input placeholder="@user" type="text" name="search">
+            </li>
+            <button type="submit" class="btn btn-success">Search</button>
+
+
             </ul>
         </div>
     </nav>

@@ -95,6 +95,30 @@
             body{
                 background-color:#E8E8E8;
             }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+                position: absolute;
+                margin-top: 1px;
+                bottom: 50%;
+            }
+
+
+
         </style>
 
 
@@ -125,10 +149,13 @@
                                     {% endif %}
                                     <div class="button_placement_home">-
                                         Posted: {{ tweet.published }}
-                                        <br><input type="image" src="/static/reply.png" width="20" height="20" title="Reply to tweet" data-toggle="modal"
-                                                   data-target="#ReplyToTweet">
 
                                         <br>
+
+
+                                     <input type="image" onclick="replyFunction('{{ tweet.tweet_id }}')" src="/static/reply.png" width="20" height="20" title="ReplyToTweet"
+                                           data-toggle="modal"
+                                           data-target="#ReplyToTweet">
 
                                      <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
                                               method="post">
@@ -143,6 +170,12 @@
                                         <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
 
+                                        {% if  my_user_profile.user_profile_name  == tweet.author_id %}
+                                        <input type="image" onclick="editReplyFunction('{{ tweet.tweet_id }}')" src="/static/edit.png" width="20" height="20" title="Edit Tweet"
+                                           data-toggle="modal"
+                                           data-target="#EditPost">
+                                        <br>
+                                        {% endif %}
 
                                             {% if  my_user_profile.user_profile_name  == tweet.author_id %}
                                                 <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
@@ -270,6 +303,78 @@
 
             </aside>
         </section>
+
+        <!-- Modal for editing a post -->
+        <div id="EditPost" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Tweet</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!--  must have enctype param or we can't upload pictures -->
+                    <form class="edit-form" id="edit_tweet" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ edit_post_form }}
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" , value="Edit">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <div id="ReplyToTweet" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reply</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!--  must have enctype param or we can't upload pictures -->
+                    <form class="site-form" id="tweet_reply_to" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ reply_tweet_form }}
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" value="Reply">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <script>
+            function editReplyFunction(tweet_Id) {
+                let frm = document.getElementById('edit_tweet') || null;
+                if (frm) {
+                    frm.action = '/home/home.html?editpost=' + tweet_Id;
+                }
+            }
+        </script>
+
+
+
+        <script>
+            function replyFunction(tweet_Id) {
+                let frm = document.getElementById('tweet_reply_to') || null;
+                if (frm) {
+                    frm.action = '/home/home.html?reply=' + tweet_Id;
+                }
+            }
+        </script>
+
 
 
         <!-- Modal for replying to messages -->

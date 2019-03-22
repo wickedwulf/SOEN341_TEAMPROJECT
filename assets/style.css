@@ -37,7 +37,7 @@ body {
 }
 
 ul#horizontal-list {
-    min-width: 696px;
+    min-width: 1000px;
     list-style: none;
     padding-top: 20px;
 }
@@ -87,21 +87,19 @@ ul#horizontal-list li {
 /* START OF CSS FOR NAVIGATION BAR */
 nav{
     min-width: 1000px;
-    justify-self: end;
+
+
 }
 nav li{
     display: inline-block;
-    text-align: center;
+    text-align: auto;
     width: 150px;
+
 }
 nav button{
     cursor: pointer;
     background: white;
-    color: black;
-    border: 3px solid;
-    border-color: lightgreen;
-    font-size: 1em;
-    padding: 0px;
+
 }
 nav form{
     margin: 0px;
@@ -110,7 +108,6 @@ nav form{
     height: 120px;
     padding: 0px;
     background-color: azure;
-
 }
 .navbar-nav{
     width: 100%;
@@ -122,21 +119,23 @@ nav form{
     height: 75px;
     width: 150px;
     padding: 0px;
-    left: 0;
+    left: 7px;
     right: 0;
-    margin: auto;
-    bottom: 45px;
+    margin: left;
+    bottom: 77px;
 }
 .navbar-brand img{
-    width: 150px;
-    height: 150px;
+    width: 147px;
+    height: 147px;
 }
 .btn{
     width: 100px;
     background-color: mediumseagreen;
     border-color: mediumseagreen;
 }
+
 nav ul{
+
     height: 75px;
 }
 

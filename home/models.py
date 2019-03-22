@@ -57,3 +57,11 @@ class Blocked_Users(models.Model):
     blocked_by = models.CharField(max_length=255, blank=True)
     block_id = models.CharField(max_length=255, blank=True)
     block_date = models.DateTimeField(default=timezone.now)
+
+class Replies_To_Tweet(models.Model):
+    tweet_id = models.CharField(max_length=255, blank=True)
+    author_id = models.CharField(max_length=255, blank=True)
+    reply_id = models.CharField(max_length=255, blank=True)
+    content = models.CharField(max_length=280, default=None)
+    media_attachment = models.ImageField(upload_to='site_media', default='default.png', blank=True)
+    reply_date = models.DateTimeField(default=timezone.now)
