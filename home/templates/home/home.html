@@ -52,6 +52,26 @@
 
             }
 
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+                position: absolute;
+                margin-top: 1px;
+                bottom: 50%;
+            }
         </style>
 
 
@@ -76,48 +96,96 @@
                                     {% endif %}
                                     <!--  attach our images to posts only if they are not the default -->
                                     {% if tweet.media_attachment.name != 'default.png' %}
-                                        <p> <img src={{ tweet.media_attachment.url }} width="200" height="200">
-                                    {% endif %}
-                                    <div class="button_placement_home">-
-                                        Posted: {{ tweet.published }}
-                                        <br><input type="image" src="/static/reply.png" width="20" height="20" title="Reply to tweet" data-toggle="modal"
-                                                   data-target="#ReplyToTweet">
-                                        <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
+                                        <div class="dropdown">
+                                            <img src="{{ tweet.media_attachment.url }}" width="200" height="200">
+                                            <div class="dropdown-content">
+                                                <img src="{{ tweet.media_attachment.url }}" width="500" height="500">
                                             </div>
-                                        </form>
-                                        <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/follow.png" width="20" height="20" title="Follow Poster"></div>
-                                        </form>
-                                        {% for isMine in userprofile %}
-                                            {% if  isMine.user_profile_name  == tweet.author_id %}
+                                        </div>
+                                    {% endif %}
+                                    <div class="button_placement_home">
+                                        Posted: {{ tweet.published }}
+                                    </div>
+
+                                    <!-- Modal for replying to messages -->
+                                    <input type="image" onclick="replyFunction('{{ tweet.tweet_id }}')" src="/static/reply.png" width="20" height="20" title="Replies"
+                                           data-toggle="modal" data-target="#ReplyToTweet">
+
+                                    <div class="dropdown">
+                                        <img src="/static/replies.png" width="20" height="20">
+                                        <div class="dropdown-content">
+                                            <!-- Show the replies in the reply box -->
+                                            {% for replies in tweet_replies %}
+                                                {% if tweet.tweet_id == replies.tweet_id %}
+                                                    {% for img in userprofile %}
+                                                        {% if img.user_profile_name == replies.author_id %}
+                                                            <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <p>{{ replies.content }}
+                                                        {% if replies.media_attachment.name != 'default.png' %}
+                                                            <img src="{{ replies.media_attachment.url }}" width="100" height="100">
+                                                        {% endif %}
+                                                    <p> {{ replies.reply_date }}</p>
+                                                    {% if  my_user_profile.user_profile_name  == replies.author_id %}
+                                                        <form class="site-form" action="/home/home.html?deletereply={{ replies.reply_id }}"
+                                                              method="post">
+                                                            {% csrf_token %}
+                                                            <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Reply">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+
+                                    <!-- testing -->
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="image" data-toggle="dropdown" src="{{ tweet.media_attachment.url }}" width="50"
+                                                height="50">
+                                            <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+                                                  method="post">
+                                                {% csrf_token %}
+
+                                                <li>{{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!"></li>
+
+                                            </form>
+                                            {% if  my_user_profile.user_profile_name  != tweet.author_id %}
+                                                <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <li><input type="image" alt="submit" src="/static/follow.png" width="20" height="20" title="Follow Poster"></li>
+                                                </form>
+                                            {% endif %}
+                                            {% if  my_user_profile.user_profile_name  == tweet.author_id %}
                                                 <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
                                                       method="post">
                                                     {% csrf_token %}
-                                                    <div class="column">
-                                                        <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
+                                                    <li><input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></li>
                                                 </form>
                                             {% endif %}
-                                        {% endfor %}
-                                        <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
-                                        </form>
-                                        <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
-                                        </form>
+
+                                            <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                <li><input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></li>
+                                            </form>
+                                            {% if  my_user_profile.user_profile_name  != tweet.author_id %}
+                                                <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <li><input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></li>
+                                                </form>
+                                            {% endif %}
+                                        </ul>
                                     </div>
+                                    <!-- really ugly sadly but only way i could figure out how to pass the tweet id atm -->
+                                    <input type="image" onclick="editReplyFunction('{{ tweet.tweet_id }}')" src="/static/edit.png" width="20" height="20" title="Edit Tweet"
+                                           data-toggle="modal"
+                                           data-target="#EditPost">
                                 </div>
                             </div>
                         {% endif %}
@@ -141,7 +209,15 @@
                                             {% endfor %}
                                             <!--  fields found in models.py used for displaying our data -->
                                             <p>{{ tweet.content }}
-                                                Posted: {{ tweet.published }}
+                                                {% if tweet.media_attachment.name != 'default.png' %}
+                                                    <div class="dropdown">
+                                                        <img src="{{ tweet.media_attachment.url }}" width="100" height="100">
+                                                        <div class="dropdown-content">
+                                                            <center><img src="{{ tweet.media_attachment.url }}" width="500" height="500"></center>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            Posted: {{ tweet.published }}
                                             <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
                                                   method="post">
                                                 {% csrf_token %}
@@ -155,28 +231,48 @@
                         {% endfor %}
                     </div>
                 </div>
-
             </aside>
         </section>
 
+        <!-- Modal for editing a post -->
+        <div id="EditPost" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Tweet</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!--  must have enctype param or we can't upload pictures -->
+                    <form class="edit-form" id="edit_tweet" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ edit_post_form }}
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" , value="Edit">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        <!-- Modal for replying to messages -->
+        <!-- this is used for showing replies and editing them -->
         <div id="ReplyToTweet" class="modal fade" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Reply Tweet</h4>
+                        <h4 class="modal-title">Replies</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <!--  must have enctype param or we can't upload pictures -->
-                        <form class="site-form" action="/home/home.html?action=reply" method="post" enctype="multipart/form-data">
+                        <form class="site-form" id="tweet_reply_to" action="" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ reply_tweet_form }}
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-default" , value="Reply">
+                                <input type="submit" class="btn btn-default" value="Reply">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -184,6 +280,28 @@
                 </div>
             </div>
         </div>
+
+
+        <script>
+            function editReplyFunction(tweet_Id) {
+                let frm = document.getElementById('edit_tweet') || null;
+                if (frm) {
+                    frm.action = '/home/home.html?editpost=' + tweet_Id;
+                }
+            }
+        </script>
+
+
+
+        <script>
+            function replyFunction(tweet_Id) {
+                let frm = document.getElementById('tweet_reply_to') || null;
+                if (frm) {
+                    frm.action = '/home/home.html?reply=' + tweet_Id;
+                }
+            }
+        </script>
+
 
     {% else %}
         <script>
