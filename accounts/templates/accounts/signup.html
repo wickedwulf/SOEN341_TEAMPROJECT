@@ -19,7 +19,7 @@
         <form class="site-form" method="post" action="/accounts/signup/"> <!-- set the form type and method of posting as well as the target -->
             {% csrf_token %}                       <!-- We should always use this on pages that send data. security thing-->
             {{ form }}                             <!-- shows the django form data on the page and creates the object to be sent-->
-           <p> <input type="submit" , value="Signup">  </p><!-- does the submission action (it's a button) -->
+           <p> <input type="submit" class="sign-button", value="Signup">  </p><!-- does the submission action (it's a button) -->
         </form>
     </div>
 </div>
