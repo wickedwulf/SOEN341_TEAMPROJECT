@@ -16,10 +16,12 @@
                 outline: inherit;
             }
             main {
+                {#background-color: #DA70D6;#}
                 float: left;
                 width: 60%;
             }
             aside {
+                {#background-color: aqua;#}
                 float: right;
                 width: 40%;
             }
@@ -40,6 +42,12 @@
                 float: left;
                 width: 15%;
             }
+            .container2 {
+                {#max-width: 400px;#}
+                width: 100%;
+                margin:  auto;
+                position: relative;
+            }
             .latest_tweets{
                 width: 700px;
                 padding: 50px;
@@ -48,6 +56,16 @@
                 position: relative;
                 bottom: 15px;
                 right: 300px;
+                background-color: #E8E8E8;
+            }
+            .latest_tweets2{
+                {#width: 700px;#}
+                padding: 50px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                bottom: 15px;
+                {#right: 300px;#}
                 background-color: #E8E8E8;
             }
 
@@ -61,6 +79,17 @@
                 right: 200px;
                 background-color: #E8E8E8;
             }
+            .followed_tweets2{
+                {#width: 700px;#}
+                padding: 20px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                top: 15px;
+                {#right: 200px;#}
+                background-color: #E8E8E8;
+            }
+
 
 
             body{
@@ -95,8 +124,8 @@
 
         <section id="pageContent">
             <main role="main">
-            <div class = container>
-                <div class="latest_tweets">
+            <div class = container2>
+                <div class="latest_tweets2">
                     <h2>Latest Tweets</h2>
                     {% for tweet in latest_tweets %}
                         {% if tweet.show_post == True %}
@@ -190,7 +219,7 @@
                 <div>
 
 
-                    <div class="followed_tweets">
+                    <div class="followed_tweets2">
                          <h2>Following</h2>
                         {% for followed in following %}
                             {% for tweet in latest_tweets %}
