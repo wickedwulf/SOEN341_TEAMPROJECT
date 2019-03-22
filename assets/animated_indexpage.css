@@ -1,0 +1,113 @@
+.set{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .leave{
+            width: 60px;
+            height: 60px;
+        }
+
+        .set div{
+            position: absolute;
+            display: block;
+        }
+        .set div:nth-child(1){
+            left: 5%;
+            animation: animate 15s linear infinite;
+        }
+        .set div:nth-child(2){
+            left: 25%;
+            animation: animate 20s linear infinite;
+            }
+        .set div:nth-child(3){
+            left: 70%;
+            animation: animate 22s linear infinite;
+            }
+        .set div:nth-child(4){
+            left: 90%;
+            animation: animate 25s linear infinite;
+            }
+
+        @keyframes animate {
+            0%
+            {
+                opacity: 0;
+                top: -10%;
+                transform: translateX(-20px) rotate(0deg)
+            }
+            10%{
+                opacity: 1;
+            }
+            20%{
+                transform: translateX(-20px) rotate(45deg)
+            }
+            40%{
+                transform: translateX(-20px) rotate(90deg)
+            }
+            60%{
+                transform: translateX(-20px) rotate(135deg)
+            }
+            100%
+            {
+                top: 110%;
+            }
+        }
+        .text h1{
+            font-size: 70px;
+            animation: textanime 5s infinite;
+
+
+        }
+        @keyframes textanime {
+            0%{
+
+                color: whitesmoke;
+            }
+            25%{
+                color: ghostwhite;
+            }
+            50%{
+                color: lightgreen;
+            }
+            75%{
+                color: rgb(124, 252, 0);
+            }
+            100%{
+                color: limegreen;
+            }
+
+        }
+        .greet span{
+        text-transform: uppercase;
+        diplay: block;
+    }
+    .text1{
+        font-size: 60px;
+        color: #4A235A;
+        font-weight: bold;
+        letter-spacing: 8px;
+        margin-bottom: 20px;
+        animation: text1 10s 1;
+        position: relative;
+        animation-iteration-count: infinite ;
+    }
+
+    @keyframes text1 {
+        0% {
+            color: #BB8FCE;
+            margin-bottome: -40px;
+        }
+        30% {
+            color: #8E44AD;
+            letter-spacing: 25px;
+            margin-bottom: -40px;
+        }
+        85% {
+            color: #DA70D6;
+            letter-spacing: 8px;
+            margin-bottom: -40px;
+        }
+    }
