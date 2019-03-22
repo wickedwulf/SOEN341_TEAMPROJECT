@@ -16,6 +16,7 @@
                 outline: inherit;
             }
             main {
+                {#background-color: #DA70D6;#}
                 float: left;
                 width: 60%;
             }
@@ -41,24 +42,24 @@
                 width: 15%;
             }
             .latest_tweets{
-                width: 700px;
+                width: 100%;
                 padding: 50px;
                 border: 1px;
                 margin: 0;
                 position: relative;
                 bottom: 15px;
-                right: 300px;
+                {#right: 300px;#}
                 background-color: #E8E8E8;
             }
 
             .followed_tweets{
-                width: 700px;
+                width: 40%;
                 padding: 20px;
                 border: 1px;
-                margin: 0;
+                {#margin: 0;#}
                 position: relative;
                 top: 15px;
-                right: 200px;
+                {#right: 200px;#}
                 background-color: #E8E8E8;
             }
 
@@ -101,60 +102,59 @@
 
                                         <br>
 
-                                     <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
-                                            </div>
-                                        </form>
+                                         <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                <div class="column">
+                                                    {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
+                                                </div>
+                                         </form>
+                                            <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
 
-                                        <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
 
+                                                {% if  my_user_profile.user_profile_name  == tweet.author_id %}
+                                                    <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        <div class="column">
+                                                            <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
+                                                    </form>
+                                                {% endif %}
 
-                                            {% if  my_user_profile.user_profile_name  == tweet.author_id %}
-                                                <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
+                                                <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
                                                       method="post">
                                                     {% csrf_token %}
                                                     <div class="column">
-                                                        <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
+                                                        <input type="image" alt="submit" src="/static/follow.png" width="20" height="20" title="Follow Poster"></div>
                                                 </form>
-                                            {% endif %}
-
-                                        <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/follow.png" width="20" height="20" title="Follow Poster"></div>
-                                        </form>
 
 
-                                        <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
-                                        </form>
-                                        <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
-                                        </form>
-                                        </ul>
-                                    </div>
+                                                <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <div class="column">
+                                                        <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
+                                                </form>
+                                                <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <div class="column">
+                                                        <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
+                                                </form>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %} <!--  needed to end for loop -->
-                    </div>
+                </div>
             </main>
             <aside>
-                <div>
+{#                <div>#}
 
 
                     <div class="followed_tweets">
@@ -237,7 +237,7 @@
                             {% endfor %} <!--  needed to end for loop -->
                         {% endfor %}
                     </div>
-                </div>
+{#                </div>#}
 
             </aside>
         </section>
