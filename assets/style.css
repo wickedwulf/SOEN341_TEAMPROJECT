@@ -51,7 +51,7 @@ ul#horizontal-list li {
 .container {
     /*max-width: 40%;*/
     /*background-color: #4A235A;*/
-    float: left;
+    /*float: left;*/
     width: 100%;
     margin:  auto;
     position: relative;
