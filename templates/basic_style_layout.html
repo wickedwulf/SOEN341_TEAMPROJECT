@@ -22,6 +22,7 @@
 
 <!-- navigation bar that is always on screen -->
 {% if user.is_authenticated %}
+    <div class="header">
     <nav class="navbar navbar-default fixed">
         <div class="navbar-nav mt-auto d-flex">
             <ul class="mx-auto text-center pl-0 ml-0">
@@ -84,6 +85,7 @@
             </ul>
         </div>
     </nav>
+    </div>
 {% endif %}
 
 <!-- Modal for writing a tweet -->
