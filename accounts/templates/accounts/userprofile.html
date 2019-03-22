@@ -10,35 +10,61 @@
         /* Puts the profile information at the topleft of the page
            Also puts a green border around the information
         */
+
+        main {
+            {#background-color: #DA70D6;#}
+            float: right;
+            width: 70%;
+            {#padding: 2%;#}
+            margin:  auto;
+            position: relative;
+            {#padding: 2%;#}
+            border-left: 5px;
+
+        }
+        aside {
+            {#background-color: aqua;#}
+            float: left;
+            width: 30%;
+            margin:  auto;
+            position: relative;
+            {#padding: ;#}
+            border-right: 5px;
+        }
         .profilelocation {
-            width: 400px;
+            width: 90%;
             padding: 10px;
             border: 3px;
-            margin: 0;
+            margin: auto;
             position: relative;
-            bottom: 170px;
-            right: 500px;
+            {#bottom: 170px;#}
+            {#right: 500px;#}
+            float: right;
             background-color: #FAFAFA;
         }
         .tweetinfo {
-            width: 900px;
+            width: 90%;
             padding: 20px;
             border: 1px;
-            margin: 0;
+            margin-left: 2%;
             position: relative;
-            bottom: 753px;
-            right: 80px;
+            {#bottom: 753px;#}
+            {#right: 80px;#}
+            {#float: right;#}
+            float: left;
             background-color: #FAFAFA;
         }
         .pinned{
             border: 1px;
-            position: absolute;
-            right: 495px;
-            top: 500px;
-            width: 400px;
+            {#position: absolute;#}
+            position: relative;
+            {#right: 495px;#}
+            {#top: 500px;#}
+            width: 90%;
             padding: 10px;
-            border: 3px;
-            margin: 0;
+            {#border: 3px;#}
+            float: right;
+            margin: auto;
         }
         body{
             background-color:#E8E8E8;
@@ -48,16 +74,9 @@
 
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    <div class = "container">
+    <aside>
+{#    <div class = "container">#}
     <div class="profilelocation">
         <center><h1>{{ my_user_profile.user_name }}</h1>
             <p><img src="{{ my_user_profile.user_profile_picture.url }}" width="150" height="150"></p>
@@ -81,7 +100,39 @@
             </form>
         </center>
     </div>
+            <div class="pinned">
+        <span style="font-size: 150%;font-weight:bold;float: right;padding-right:5%;display: grid;grid-column-align: center; ">Pinned Posts
 
+            {% for my_pinned_tweets in tweets %}
+                {% for pinned in pinned_posts %}
+                    {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == my_user_profile.user_profile_name %}
+                        <div class="pinned_boxed">
+                        <div class="shadow p-3 mb-5 bg-white rounded">
+                        {% for pinned_user in userprofile %} <!-- Needs to be loop through all users to find the correct profile picture -->
+                            {% if pinned_user.user_profile_name == my_pinned_tweets.author_id %}
+                                <p><img src={{ pinned_user.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
+                            {% endif %}
+                        {% endfor %}
+
+                            <h2>{{ my_pinned_tweets.content }}</h2>
+                            <h6>Posted: {{ my_pinned_tweets.published }}</h6>
+                          <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
+                             {% csrf_token %}
+                              <div class="column">
+                                 <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Unpin Post">
+                              </div>
+                          </form>
+                         </div>
+                        </div>
+                    {% endif %}
+                {% endfor %} <!--  needed to end for loop -->
+            {% endfor %} <!--  needed to end for loop -->
+        </span>
+    </div>
+{#    </div>#}
+    </aside>
+
+    <main>
     <div class="tweetinfo">
         {% for my_tweets in tweets %}
             {% if my_tweets.author_id == my_user_profile.user_profile_name %}
@@ -133,36 +184,9 @@
         {% endfor %} <!--  needed to end for loop -->
     </div>
 
-    <div class="pinned">
-        <span style="font-size: 150%;font-weight:bold;float: right;padding-right:5%;display: grid;grid-column-align: center; ">Pinned Posts
 
-            {% for my_pinned_tweets in tweets %}
-                {% for pinned in pinned_posts %}
-                    {% if pinned.tweet_id == my_pinned_tweets.tweet_id and pinned.pinned_by_user == my_user_profile.user_profile_name %}
-                        <div class="pinned_boxed">
-                        <div class="shadow p-3 mb-5 bg-white rounded">
-                        {% for pinned_user in userprofile %} <!-- Needs to be loop through all users to find the correct profile picture -->
-                            {% if pinned_user.user_profile_name == my_pinned_tweets.author_id %}
-                                <p><img src={{ pinned_user.user_profile_picture.url }} width="50" height="50">{{ my_pinned_tweets.author_id }}</p>
-                            {% endif %}
-                        {% endfor %}
+    </main>
 
-                            <h2>{{ my_pinned_tweets.content }}</h2>
-                            <h6>Posted: {{ my_pinned_tweets.published }}</h6>
-                          <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
-                             {% csrf_token %}
-                              <div class="column">
-                                 <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Unpin Post">
-                              </div>
-                          </form>
-                         </div>
-                        </div>
-                    {% endif %}
-                {% endfor %} <!--  needed to end for loop -->
-            {% endfor %} <!--  needed to end for loop -->
-        </span>
-    </div>
-    </div>
 
 
     <!-- Modal -->
