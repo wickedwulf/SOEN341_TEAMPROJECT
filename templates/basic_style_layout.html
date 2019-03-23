@@ -27,7 +27,12 @@
     <nav class="navbar navbar-default fixed">
         <div class="navbar-nav mt-auto d-flex">
             <ul class="mx-auto text-center pl-0 ml-0">
+                <li>
+                        <img src="{{ my_user_profile.user_profile_picture.url }}" width="70" height="70">
+
+                </li>
                 <li> <!--  The following check needs to be done because some pages return arrays for userprofile and not a single profile-->
+                    <!-- <img src="{{ my_user_profile.user_profile_picture.url }}" width="50" height="50"> -->
                     Logged in as: {{ user.get_username }}<br>
                     {% if userprofile.user_profile_name != null %}
                         Profile ID: {{ userprofile.user_profile_name }}
@@ -39,6 +44,7 @@
                         {% endfor %}
 
                     {% endif %}
+                    
 
                 </li>
 
