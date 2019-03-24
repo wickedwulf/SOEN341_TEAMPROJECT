@@ -25,20 +25,20 @@
 <!-- navigation bar that is always on screen -->
 {% if user.is_authenticated %}
     <nav class="navbar navbar-default fixed">
-        <div class="navbar-nav mt-auto d-flex"> 
+        <div class="navbar-nav mt-0 d-flex">
             <ul class="mx-auto text-center pl-0 ml-0">
                 <li>
-                    <table style="background-color:#E8E8E8;">
+                    <table style="background-color:#FFFFFF;">
                         <tr>
                                 <td><img src="{{ my_user_profile.user_profile_picture.url }}" width="70" height="70" style="margin-right:20px;"></td>
 
-                                <td>Logged in as: {{ user.get_username }}<br>
+                                <td>{{ user.get_username }}<br><br>
                                 {% if userprofile.user_profile_name != null %}
                                     Profile ID: {{ userprofile.user_profile_name }}
                                 {% else %}
                                     {% for name in userprofile %}
                                         {% if name.user_name == user.get_username %}
-                                            Profile ID: {{ name.user_profile_name }}
+                                            Your Profile ID: {{ name.user_profile_name }}
                                         {% endif %}
                                     {% endfor %}
             
@@ -54,11 +54,11 @@
 
                     <!-- Logged in as: {{ user.get_username }}<br>
                     {% if userprofile.user_profile_name != null %}
-                        Profile ID: {{ userprofile.user_profile_name }}
+                        Your Profile ID: {{ userprofile.user_profile_name }}
                     {% else %}
                         {% for name in userprofile %}
                             {% if name.user_name == user.get_username %}
-                                Profile ID: {{ name.user_profile_name }}
+                              Your Profile ID: {{ name.user_profile_name }}
                             {% endif %}
                         {% endfor %}
 
