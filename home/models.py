@@ -37,9 +37,9 @@ class Replies_To_Tweet(models.Model):
     tweet_id = models.CharField(max_length=255, blank=True)
     author_id = models.CharField(max_length=255, blank=True)
     reply_id = models.CharField(max_length=255, blank=True)
-    content = models.TextField(max_length=280, default=None)
-    author_id = models.CharField(max_length=255, blank=True)
-
+    content = models.CharField(max_length=280, default=None)
+    media_attachment = models.ImageField(upload_to='site_media', default='default.png', blank=True)
+    reply_date = models.DateTimeField(default=timezone.now)
 
 class Private_Message(models.Model):
     private_message_id = models.CharField(max_length=255, blank=True)

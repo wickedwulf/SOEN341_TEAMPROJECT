@@ -70,6 +70,39 @@
             background-color:#E8E8E8;
         }
 
+        button_placement_home {
+            float: left;
+            width: 20%;
+
+        }
+
+        .column image input {
+
+            float: left;
+            width: 15%;
+
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            position: absolute;
+            margin-top: 1px;
+            bottom: 50%;
+        }
     </style>
 
     <br>
@@ -159,7 +192,12 @@
 
                     <!--  Only display image if it's not the default.png -->
                     {% if my_tweets.media_attachment.name != 'default.png' %}
-                        <p> <img src={{ my_tweets.media_attachment.url }} width="200" height="200">
+                        <div class="dropdown">
+                            <img src="{{ my_tweets.media_attachment.url }}" width="200" height="200">
+                            <div class="dropdown-content">
+                                <img src="{{ my_tweets.media_attachment.url }}" width="500" height="500">
+                            </div>
+                        </div>
                     {% endif %}
                     <!--  end display image -->
 

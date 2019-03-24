@@ -10,7 +10,6 @@ import os
 
 def homeactions(request):
     my_user_profile = user_profile.objects.get(user_name=request.user)
-
     blocked_list = Blocked_Users.objects.all()
     latest_tweets = Twitter_Tweet.objects.all().order_by('published').reverse()  # used to apply  blocking feature
 
@@ -41,11 +40,9 @@ def homeactions(request):
     priv_msg_form = forms.Private_Message_Form()
     following = Following_Users.objects.all()
     post_form = forms.NewTweetForm()
-
     reply_tweet_form = forms.Reply_To_Tweet_Form()
     edit_post_form = forms.Edit_Post_Form()
     tweet_replies = Replies_To_Tweet.objects.all()
-
     query = request.GET
     # used for doing new tweets
     if 'action' in query.keys():  # used for sending parameters from buttons on the same page.. might be a better way *shrug*
@@ -78,7 +75,30 @@ def homeactions(request):
                 return redirect('home:home_actions')  # send user to latest page to view their tweet
             return HttpResponse('somethings wrong - check homeactions code in home/views.py file')
 
+    # create reply to message
+    elif 'reply' in query.keys():
+        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
+            tweet_reply = forms.Reply_To_Tweet_Form(request.POST, request.FILES)
+            if tweet_reply.is_valid():
+                new_reply_form = tweet_reply.save(commit=False)
+                main_tweet = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('reply')))
+                new_reply_form.tweet_id = main_tweet.tweet_id
+                new_reply_form.author_id = my_user_profile.user_profile_name
+                new_reply_form.reply_id = hashlib.sha1(main_tweet.content.encode('utf-8') + new_reply_form.content.encode('utf-8')).hexdigest()
+                new_reply_form.save()
+        return redirect('home:home_actions')
 
+        # this handles deleting the replies to tweet
+    elif 'deletereply' in query.keys():
+        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
+            try:
+                del_reply_to_tweet = Replies_To_Tweet.objects.get(reply_id="{}".format(query.get('deletereply')))
+                if del_reply_to_tweet.media_attachment != 'default.png':
+                    delete_old_pictures(del_reply_to_tweet.media_attachment)  # send the message string to the delete function
+                del_reply_to_tweet.delete()
+            except Replies_To_Tweet.DoesNotExist:
+                print("Could not find reply message")
+            return redirect('home:home_actions')
 
     # this handles deleting the private messages and removing any attached pictures
     elif 'deleteprivatemsg' in query.keys():
@@ -93,8 +113,6 @@ def homeactions(request):
             return redirect('home:home_actions')
 
         return HttpResponse('somethings wrong - check homeactions code in home/views.py file')
-
-
 
     # This handles looking for the tweet ID from the passed variables and liking it
     elif 'liked' in query.keys():
@@ -160,91 +178,6 @@ def homeactions(request):
                 follow_profile.save()
         return redirect('home:home_actions')
 
-        # create reply to message
-    elif 'reply' in query.keys():
-        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
-            tweet_reply = forms.Reply_To_Tweet_Form(request.POST, request.FILES)
-            if tweet_reply.is_valid():
-                new_reply_form = tweet_reply.save(commit=False)
-                main_tweet = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('reply')))
-                new_reply_form.tweet_id = main_tweet.tweet_id
-                new_reply_form.author_id = my_user_profile.user_profile_name
-                new_reply_form.reply_id = hashlib.sha1(
-                    main_tweet.content.encode('utf-8') + new_reply_form.content.encode('utf-8')).hexdigest()
-                new_reply_form.save()
-        return redirect('home:home_actions')
-
-        # this handles deleting the replies to tweet
-    elif 'deletereply' in query.keys():
-        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
-            try:
-                del_reply_to_tweet = Replies_To_Tweet.objects.get(reply_id="{}".format(query.get('deletereply')))
-                if del_reply_to_tweet.media_attachment != 'default.png':
-                    delete_old_pictures(
-                        del_reply_to_tweet.media_attachment)  # send the message string to the delete function
-                del_reply_to_tweet.delete()
-            except Replies_To_Tweet.DoesNotExist:
-                print("Could not find reply message")
-            return redirect('home:home_actions')
-
-
-    # edit a post
-    elif 'editpost' in query.keys():
-        if request.method == 'POST':
-            edit_form = forms.Edit_Post_Form(request.POST, request.FILES)  # get the data from the fields on the page
-            if edit_form.is_valid():  # check if the form is valid i.e right kind of data
-                tmp_edit_form = edit_form.save(commit=False)
-                edit_old_post = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('editpost')))
-                edit_old_post.content_key = tmp_edit_form.content_key
-                edit_old_post.content = tmp_edit_form.content
-                if tmp_edit_form.media_attachment != 'default.png':
-                    edit_old_post.media_attachment = tmp_edit_form.media_attachment
-                if tmp_edit_form.encrypt_content:
-                    edit_old_post.encrypt_content = tmp_edit_form.encrypt_content
-                    edit_old_post.show_encrypted = True
-                else:
-                    edit_old_post.encrypt_content = False
-                    edit_old_post.show_encrypted = False
-
-                edit_old_post.save()
-        return redirect('home:home_actions')
-
-        # this handles deleting the replies to tweet
-    elif 'deletereply' in query.keys():
-        if request.method == 'POST':  # check that this is a valid post message from botton and not someone loading page
-            try:
-                del_reply_to_tweet = Replies_To_Tweet.objects.get(reply_id="{}".format(query.get('deletereply')))
-                if del_reply_to_tweet.media_attachment != 'default.png':
-                    delete_old_pictures(
-                        del_reply_to_tweet.media_attachment)  # send the message string to the delete function
-                del_reply_to_tweet.delete()
-            except Replies_To_Tweet.DoesNotExist:
-                print("Could not find reply message")
-            return redirect('home:home_actions')
-
-
-    # edit a post
-    elif 'editpost' in query.keys():
-        if request.method == 'POST':
-            edit_form = forms.Edit_Post_Form(request.POST, request.FILES)  # get the data from the fields on the page
-            if edit_form.is_valid():  # check if the form is valid i.e right kind of data
-                tmp_edit_form = edit_form.save(commit=False)
-                edit_old_post = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('editpost')))
-                edit_old_post.content_key = tmp_edit_form.content_key
-                edit_old_post.content = tmp_edit_form.content
-                if tmp_edit_form.media_attachment != 'default.png':
-                    edit_old_post.media_attachment = tmp_edit_form.media_attachment
-                if tmp_edit_form.encrypt_content:
-                    edit_old_post.encrypt_content = tmp_edit_form.encrypt_content
-                    edit_old_post.show_encrypted = True
-                else:
-                    edit_old_post.encrypt_content = False
-                    edit_old_post.show_encrypted = False
-
-                edit_old_post.save()
-        return redirect('home:home_actions')
-
-
     # pin the post by storing the id of the post and the user that pinned it
     elif 'pin' in query.keys():
         if request.method == 'POST':
@@ -261,6 +194,26 @@ def homeactions(request):
                 pin.save()
         return redirect('home:home_actions')
 
+    # edit a post
+    elif 'editpost' in query.keys():
+        if request.method == 'POST':
+            edit_form = forms.Edit_Post_Form(request.POST, request.FILES)  # get the data from the fields on the page
+            if edit_form.is_valid():  # check if the form is valid i.e right kind of data
+                tmp_edit_form = edit_form.save(commit=False)
+                edit_old_post = Twitter_Tweet.objects.get(tweet_id="{}".format(query.get('editpost')))
+                edit_old_post.content_key = tmp_edit_form.content_key
+                edit_old_post.content = tmp_edit_form.content
+                if tmp_edit_form.media_attachment != 'default.png':
+                    edit_old_post.media_attachment = tmp_edit_form.media_attachment
+                if tmp_edit_form.encrypt_content:
+                    edit_old_post.encrypt_content = tmp_edit_form.encrypt_content
+                    edit_old_post.show_encrypted = True
+                else:
+                    edit_old_post.encrypt_content = False
+                    edit_old_post.show_encrypted = False
+
+                edit_old_post.save()
+        return redirect('home:home_actions')
 
     # block a user so we can't see them
     elif 'block' in query.keys():
@@ -277,11 +230,9 @@ def homeactions(request):
     else:
         my_user_profile = user_profile.objects.get(user_name=request.user)
         return render(request, 'home/home.html',
-                      {'tweet_replies': tweet_replies, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
-                       'post_form': post_form, 'latest_tweets': latest_tweets,
+                      {'tweet_replies': tweet_replies, 'my_user_profile': my_user_profile, 'userprofile': userprofile, 'post_form': post_form, 'latest_tweets': latest_tweets,
                        'following': following, 'blocked_list': blocked_list,
-                       'priv_msg_form': priv_msg_form, 'my_mail': my_mail, 'reply_tweet_form': reply_tweet_form,
-                       'edit_post_form': edit_post_form})
+                       'priv_msg_form': priv_msg_form, 'my_mail': my_mail, 'reply_tweet_form': reply_tweet_form, 'edit_post_form': edit_post_form})
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
 
 
