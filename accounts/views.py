@@ -192,7 +192,7 @@ def user_profile_view(request):
                            'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
         else:
             return render(request, 'accounts/userprofile.html',
-                          {'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'userprofile': userprofile, 'post_form': post_form,
+                          {'tweets': tweets, 'blocked_list': blocked_list, 'key_listing': key_listing, 'encrypt_key_form': encrypt_key_form, 'userprofile': userprofile, 'post_form': post_form,
                            'edituserprofile': edituserprofile, 'my_user_profile': my_user_profile, 'pinned_posts': pinned, 'priv_msg_form': priv_msg_form, 'my_mail': my_mail})
 
 
