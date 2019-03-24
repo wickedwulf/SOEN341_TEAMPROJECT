@@ -6,7 +6,9 @@
         <br>
         <br>
         <style>
-            button, input[type="submit"] {
+            /* The following button styling conflicts with the basic_style_layout.html button styling*/
+            /* Commented to keep the submit button green (uniform to the whole website */
+            /*button, input[type="submit"] {
                 background: none;
                 color: inherit;
                 border: none;
@@ -14,7 +16,7 @@
                 font: inherit;
                 cursor: pointer;
                 outline: inherit;
-            }
+            }*/
             main {
                 {#background-color: #DA70D6;#}
                 float: left;
@@ -320,7 +322,7 @@
                         {{ edit_post_form }}
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-default" , value="Edit">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default close-button" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -345,7 +347,7 @@
                         {{ reply_tweet_form }}
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-default" value="Reply">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default close-button" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -394,7 +396,7 @@
                             {{ reply_tweet_form }}
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-default" , value="Reply">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default close-button" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>

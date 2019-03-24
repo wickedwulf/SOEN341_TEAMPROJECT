@@ -73,6 +73,8 @@ ul#horizontal-list li {
 }
 .home-login-form input, .home-login-form textarea{
     display: block;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1px;
 }
 .core-site-logo-btn button{
@@ -81,7 +83,7 @@ ul#horizontal-list li {
 
 
 .home-login-btn{
-     margin-left: 35%;
+     margin-left: auto;
      margin-right: auto;
      padding: 5px;
 }
@@ -149,3 +151,8 @@ nav ul{
     background-color: #DA70D6;
 }
 
+.close-button{
+    width: 100px;
+    background-color: lightgrey;
+    border-color: lightgrey;
+}
