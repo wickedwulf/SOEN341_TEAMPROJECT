@@ -202,12 +202,19 @@
                                             <div class="column">
                                                 <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
                                         </form>
+
                                         <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
                                               method="post">
                                             {% csrf_token %}
                                             <div class="column">
                                                 <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
                                         </form>
+
+                                        {% csrf_token %}
+                                        <div class="column">
+                                            <input type="image" src="/static/comment.png" width="20" height="20" title="View comment" data-toggle="modal" data-target="#ReadComments">
+{#                                                <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">#}
+                                        </div>
                                         </ul>
                                     </div>
                                     </div>
@@ -404,9 +411,42 @@
             </div>
         </div>
 
+<!-- Modal for reading comments -->
+<div id="ReadComments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content for showing private messages-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your Comments</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {% for comment in tweet.replies %}
+{#                    {% if mail.target_user_id == my_user_profile.user_profile_name and mail.show_message == True %}#}
+{#                        <p>Sent from: {{ mail.source_author_id }}#}
+{#                        <p>{{ mail.content }}#}
+{#                            <!--  attach our images to posts only if they are not the default -->#}
+{#                            {% if mail.media_attachment.name != 'default.png' %}#}
+{#                                <p> <img src={{ mail.media_attachment.url }} width="200" height="200">#}
+{#                            {% endif %}#}
+{#                        <p>Sent: {{ mail.sent_date }}#}
+{#                        <form class="site-form" action="/home/home.html?deleteprivatemsg={{ mail.private_message_id }}"#}
+{#                              method="post">#}
+{#                            {% csrf_token %}#}
+{#                            <div class="column">#}
+{#                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Message"></div>#}
+{#                        </form>#}
+{#                    {% endif %}#}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
     {% else %}
         <script>
             window.location.href = '/';
         </script>
     {% endif %}
 {% endblock %}
+
