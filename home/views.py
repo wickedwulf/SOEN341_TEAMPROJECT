@@ -46,6 +46,9 @@ def homeactions(request):
     edit_post_form = forms.Edit_Post_Form()
     tweet_replies = Replies_To_Tweet.objects.all()
 
+    tweet_replies_filtered = None
+
+
     query = request.GET
     # used for doing new tweets
     if 'action' in query.keys():  # used for sending parameters from buttons on the same page.. might be a better way *shrug*
@@ -273,11 +276,25 @@ def homeactions(request):
             block.save()
         return redirect('home:home_actions')
 
+
+    elif 'filter_replies' in query.keys():
+        if request.method == 'GET':
+            currentTweetId = "{}".format(query.get('filter_replies'))
+            i = 0
+            tweet_replies_filtered = None
+            user_profile.user_name = 'hahaha'
+            user_profile_name = 'hehehe'
+            for item in tweet_replies:
+                if item.tweet_id == currentTweetId:
+                    tweet_replies_filtered[i] = item
+        # return HttpResponse('haha')
+        return render(request, 'home/home.html',tweet_replies_filtered)
+
     # need to send all that above data to the page so we can access it for the modal boxes and stuff
     else:
         my_user_profile = user_profile.objects.get(user_name=request.user)
         return render(request, 'home/home.html',
-                      {'tweet_replies': tweet_replies, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
+                      {'tweet_replies_filtered': tweet_replies_filtered, 'tweet_replies': tweet_replies, 'my_user_profile': my_user_profile, 'userprofile': userprofile,
                        'post_form': post_form, 'latest_tweets': latest_tweets,
                        'following': following, 'blocked_list': blocked_list,
                        'priv_msg_form': priv_msg_form, 'my_mail': my_mail, 'reply_tweet_form': reply_tweet_form,

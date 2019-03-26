@@ -17,6 +17,7 @@
                 cursor: pointer;
                 outline: inherit;
             }*/
+
             main {
                 {#background-color: #DA70D6;#}
                 float: left;
@@ -43,6 +44,9 @@
             .column image input {
                 float: left;
                 width: 15%;
+            }
+            .replies{
+                display: none;
             }
             .container2 {
                 {#max-width: 400px;#}
@@ -118,9 +122,6 @@
                 margin-top: 1px;
                 bottom: 50%;
             }
-
-
-
         </style>
 
 
@@ -168,8 +169,11 @@
                                         </form>
 
                                         <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+{#                                        <form class="dropdown" action="/home/home.html?filter_replies={{ tweet.tweet_id }}" method="post">#}
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                            Options
                                         <span class="caret"></span></button>
+{#                                        </form>#}
                                         <ul class="dropdown-menu">
 
                                         {% if  my_user_profile.user_profile_name  == tweet.author_id %}
@@ -210,13 +214,37 @@
                                                 <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
                                         </form>
 
-                                        {% csrf_token %}
-                                        <div class="column">
-                                            <input type="image" src="/static/comment.png" width="20" height="20" title="View comment" data-toggle="modal" data-target="#ReadComments">
-{#                                                <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">#}
+{#                                        {% csrf_token %}#}
+                                        <div>
+                                            <input onclick="hideOrShowDiv('{{ tweet.tweet_id }}')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>
                                         </div>
                                         </ul>
                                     </div>
+                                    </div>
+
+                                    <div style="display: none" id={{ tweet.tweet_id }} >
+
+                                        {% for replies in tweet_replies %}
+                                            {% if tweet.tweet_id == replies.tweet_id %}
+                                                {% for img in userprofile %}
+                                                    {% if img.user_profile_name == replies.author_id %}
+                                                        <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <p>{{ replies.content }}
+                                                    {% if replies.media_attachment.name != 'default.png' %}
+                                                        <img src="{{ replies.media_attachment.url }}" width="100" height="100">
+                                                    {% endif %}
+                                                <p> {{ replies.reply_date }}</p>
+                                                {% if  my_user_profile.user_profile_name  == replies.author_id %}
+                                                    <form class="site-form" action="/home/home.html?deletereply={{ replies.reply_id }}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Reply">
+                                                    </form>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -226,8 +254,6 @@
             </main>
             <aside>
                 <div>
-
-
                     <div class="followed_tweets2">
                          <h2>Following</h2>
                         {% for followed in following %}
@@ -298,10 +324,36 @@
                                                         <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
                                                 </form>
                                             {% endif %}
+{#                                        <div>#}
+{#                                            <input onclick="hideOrShowDiv('Following_{{ tweet.tweet_id }}')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>#}
+{#                                        </div>#}
 
                                                 </ul>
                                             </div>
                                         </div>
+{#                                         <div style="display: block" id='Following_'{{ tweet.tweet_id }} >#}
+{#                                            {% for replies in tweet_replies %}#}
+{#                                                {% if tweet.tweet_id == replies.tweet_id %}#}
+{#                                                    {% for img in userprofile %}#}
+{#                                                        {% if img.user_profile_name == replies.author_id %}#}
+{#                                                            <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>#}
+{#                                                        {% endif %}#}
+{#                                                    {% endfor %}#}
+{#                                                    <p>{{ replies.content }}#}
+{#                                                        {% if replies.media_attachment.name != 'default.png' %}#}
+{#                                                            <img src="{{ replies.media_attachment.url }}" width="100" height="100">#}
+{#                                                        {% endif %}#}
+{#                                                    <p> {{ replies.reply_date }}</p>#}
+{#                                                    {% if  my_user_profile.user_profile_name  == replies.author_id %}#}
+{#                                                        <form class="site-form" action="/home/home.html?deletereply={{ replies.reply_id }}"#}
+{#                                                              method="post">#}
+{#                                                            {% csrf_token %}#}
+{#                                                            <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Reply">#}
+{#                                                        </form>#}
+{#                                                    {% endif %}#}
+{#                                                {% endif %}#}
+{#                                            {% endfor %}#}
+{#                                        </div>#}
                                     </div>
 
                                 {% endif %}
@@ -377,6 +429,7 @@
 
         <script>
             function replyFunction(tweet_Id) {
+                console.log("Hello world! -replyFunction");
                 let frm = document.getElementById('tweet_reply_to') || null;
                 if (frm) {
                     frm.action = '/home/home.html?reply=' + tweet_Id;
@@ -385,6 +438,28 @@
         </script>
 
 
+        <script>
+            function hideOrShowDiv(id) {
+                console.log(id);
+              let x = document.getElementById(id);
+              if (x.style.display === "none") {
+                x.style.display = "block"
+              } else {
+                x.style.display = "none";
+              }
+            }
+        </script>
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myDIV");
+              if (x.style.display === "none") {
+                x.style.display = "block";
+              } else {
+                x.style.display = "none";
+              }
+            }
+        </script>
 
         <!-- Modal for replying to messages -->
         <div id="ReplyToTweet" class="modal fade" role="dialog">
@@ -411,18 +486,19 @@
             </div>
         </div>
 
-<!-- Modal for reading comments -->
-<div id="ReadComments" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content for showing private messages-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Your Comments</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                {% for comment in tweet.replies %}
+{#<!-- Modal for reading comments -->#}
+{#<div id="ReadComments" class="modal fade" role="dialog">#}
+{#    <div class="modal-dialog">#}
+{##}
+{#        <!-- Modal content for showing private messages-->#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header">#}
+{#                <h4 class="modal-title">Your Comments</h4>#}
+{#                <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+{#            </div>#}
+{#            <div class="modal-body">#}
+{#                {% for reply in tweet_replies_filtered %}#}
+{#                    <div> {{ reply }}</div>#}
 {#                    {% if mail.target_user_id == my_user_profile.user_profile_name and mail.show_message == True %}#}
 {#                        <p>Sent from: {{ mail.source_author_id }}#}
 {#                        <p>{{ mail.content }}#}
@@ -438,11 +514,11 @@
 {#                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Message"></div>#}
 {#                        </form>#}
 {#                    {% endif %}#}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
     {% else %}
         <script>
             window.location.href = '/';
