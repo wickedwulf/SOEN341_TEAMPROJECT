@@ -19,12 +19,12 @@
             }*/
 
             main {
-                {#background-color: #DA70D6;#}
+                background-color: #DA70D6;
                 float: left;
                 width: 60%;
             }
             aside {
-                {#background-color: aqua;#}
+                background-color: aqua;
                 float: right;
                 width: 40%;
             }
@@ -45,58 +45,105 @@
                 float: left;
                 width: 15%;
             }
-            .replies{
-                display: none;
-            }
-            .container2 {
+            {#.container2 {#}
                 {#max-width: 400px;#}
-                width: 100%;
-                margin:  auto;
-                position: relative;
-            }
-            .latest_tweets{
-                width: 700px;
-                padding: 50px;
-                border: 1px;
-                margin: 0;
-                position: relative;
-                bottom: 15px;
-                right: 300px;
-                background-color: #E8E8E8;
-            }
-            .latest_tweets2{
+            {#    width: 100%;#}
+            {#    margin:  auto;#}
+            {#    position: relative;#}
+            {#}#}
+            {#.latest_tweets{#}
+            {#    width: 700px;#}
+            {#    padding: 50px;#}
+            {#    border: 1px;#}
+            {#    margin: 0;#}
+            {#    position: relative;#}
+            {#    bottom: 15px;#}
+            {#    right: 300px;#}
+            {#    background-color: #E8E8E8;#}
+            {#}#}
+            {#.latest_tweets2{#}
                 {#width: 700px;#}
-                padding: 50px;
-                border: 1px;
-                margin: 0;
-                position: relative;
-                bottom: 15px;
+            {#    padding: 50px;#}
+            {#    border: 1px;#}
+            {#    margin: 0;#}
+            {#    position: relative;#}
+            {#    bottom: 15px;#}
                 {#right: 300px;#}
+            {#    background-color: #E8E8E8;#}
+            {#}#}
+            {##}
+            {#.followed_tweets{#}
+            {#    width: 700px;#}
+            {#    padding: 20px;#}
+            {#    border: 1px;#}
+            {#    margin: 0;#}
+            {#    position: relative;#}
+            {#    top: 15px;#}
+            {#    right: 200px;#}
+            {#    background-color: #E8E8E8;#}
+            {#}#}
+            {#.followed_tweets2{#}
+                {#width: 700px;#}
+            {#    padding: 20px;#}
+            {#    border: 1px;#}
+            {#    margin: 0;#}
+            {#    position: relative;#}
+            {#    top: 15px;#}
+                {#right: 200px;#}
+            {#    background-color: #E8E8E8;#}
+            {#}#}
+
+            .latest_tweets{
+                {#padding: 20%; #}
+                position: center;
+                background-position: center;
+                width: 60%;
+                margin: auto;
+                {#left: 20%;#}
+                {#right: 20%;#}
+                top: 2%;
                 background-color: #E8E8E8;
+                display: block;
             }
 
             .followed_tweets{
-                width: 700px;
-                padding: 20px;
-                border: 1px;
-                margin: 0;
-                position: relative;
-                top: 15px;
-                right: 200px;
+                {#padding: 20%; #}
+                position: center;
+                background-position: center;
+                width: 60%;
+                margin: auto;
+                {#left: 20%;#}
+                {#right: 20%;#}
+                top: 2%;
                 background-color: #E8E8E8;
+                display: none;
             }
-            .followed_tweets2{
-                {#width: 700px;#}
-                padding: 20px;
-                border: 1px;
-                margin: 0;
-                position: relative;
-                top: 15px;
-                {#right: 200px;#}
+            .tweets{
+                {#padding: 20%; #}
+                position: center;
+                background-position: center;
+                width: 60%;
+                margin: auto;
+                {#left: 20%;#}
+                {#right: 20%;#}
+                top: 2%;
                 background-color: #E8E8E8;
             }
 
+            .latest_tweet_replies{
+                display: none;
+            }
 
+            .followed_tweet_replies{
+                display: none;
+            }
+            .replies{
+                display: none;
+            }
+            .toggle_button{
+                margin: auto;
+                position: center;
+            }
 
             body{
                 background-color:#E8E8E8;
@@ -126,9 +173,15 @@
 
 
         <section id="pageContent">
-            <main role="main">
-            <div class = container2>
-                <div class="latest_tweets2">
+
+{#        <div class="toggle_button">#}
+            <button class="toggle_button" onclick="toggleView()" type="button" id="toggleButton" title="View comment">Following</button>
+{#        </div>#}
+        <br><br><br><br>
+
+{#            <main role="main">#}
+{#            <div class = container2>#}
+                <div class="latest_tweets" id="latest_tweet">
                     <h2>Latest Tweets</h2>
                     {% for tweet in latest_tweets %}
                         {% if tweet.show_post == True %}
@@ -216,13 +269,13 @@
 
 {#                                        {% csrf_token %}#}
                                         <div>
-                                            <input onclick="hideOrShowDiv('{{ tweet.tweet_id }}')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>
+                                            <input onclick="hideOrShowDiv('{{ tweet.tweet_id }}', '0')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>
                                         </div>
                                         </ul>
                                     </div>
                                     </div>
 
-                                    <div style="display: none" id={{ tweet.tweet_id }} >
+                                    <div class="replies" id={{ tweet.tweet_id }}  >
 
                                         {% for replies in tweet_replies %}
                                             {% if tweet.tweet_id == replies.tweet_id %}
@@ -251,118 +304,120 @@
                         {% endif %}
                     {% endfor %} <!--  needed to end for loop -->
                     </div>
-            </main>
-            <aside>
-                <div>
-                    <div class="followed_tweets2">
-                         <h2>Following</h2>
-                        {% for followed in following %}
-                            {% for tweet in latest_tweets %}
-                                {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
-                                    <!--  Creates a python foreach type loop that enumerates all object data -->
+{#            </div>#}
+{#            </main>#}
+{#            <aside>#}
+{#                <div>#}
+                <div class="followed_tweets" id="following">
+                     <h2>Following</h2>
+                    {% for followed in following %}
+                        {% for tweet in latest_tweets %}
+                            {% if tweet.author_id == followed.followed_user and followed.liked_by_user == my_user_profile.user_profile_name %}
+                                <!--  Creates a python foreach type loop that enumerates all object data -->
 
-                                    <div class="followed_tweet">           <!--  single object data -->
-                                        <div class="shadow p-3 mb-5 bg-white rounded">
-                                            {% for img in userprofile %}
-                                                {% if img.user_profile_name == tweet.author_id %}
-                                                    <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
-                                                {% endif %}
-                                            {% endfor %}
+                                <div class="followed_tweet">           <!--  single object data -->
+                                    <div class="shadow p-3 mb-5 bg-white rounded">
+                                        {% for img in userprofile %}
+                                            {% if img.user_profile_name == tweet.author_id %}
+                                                <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ tweet.author_id }}</p>
+                                            {% endif %}
+                                        {% endfor %}
 
-                                            <!--  fields found in models.py used for displaying our data -->
+                                        <!--  fields found in models.py used for displaying our data -->
 
-                                                {{ tweet.content }}
-                                                <br>
-                                                <br>
-
-                                                Posted: {{ tweet.published }}
-
+                                            {{ tweet.content }}
+                                            <br>
                                             <br>
 
+                                            Posted: {{ tweet.published }}
 
-                                        <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+                                        <br>
+
+
+                                    <form class="site-form" action="/home/home.html?liked={{ tweet.tweet_id }}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <div class="column">
+                                            {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
+                                        </div>
+                                    </form>
+
+                                        <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+
+                                    <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <div class="column">
+                                            <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
+                                    </form>
+
+                                         <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
                                               method="post">
                                             {% csrf_token %}
                                             <div class="column">
-                                                {{ tweet.favourites }}<input type="image" alt="submit" src="/static/like.jpg" width="20" height="20" title="Like Post!">
-                                            </div>
+                                                <input type="image" alt="submit" src="/static/unfollow.svg" width="20" height="20" title="Follow Poster"></div>
+
+
                                         </form>
 
-                                            <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-
-                                        <form class="site-form" action="/home/home.html?pin={{ tweet.tweet_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/pin.png" width="20" height="20" title="Pin Post"></div>
+                                        <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <div class="column">
+                                            <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
                                         </form>
 
-                                             <form class="site-form" action="/home/home.html?follow={{ tweet.author_id }}"
+                                        {% if  my_user_profile.user_profile_name  == tweet.author_id %}
+                                            <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
                                                   method="post">
                                                 {% csrf_token %}
                                                 <div class="column">
-                                                    <input type="image" alt="submit" src="/static/unfollow.svg" width="20" height="20" title="Follow Poster"></div>
-
-
+                                                    <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
                                             </form>
-
-                                            <form class="site-form" action="/home/home.html?block={{ tweet.author_id }}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <div class="column">
-                                                <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
-                                            </form>
-
-                                            {% if  my_user_profile.user_profile_name  == tweet.author_id %}
-                                                <form class="site-form" action="/home/home.html?delete={{ tweet.tweet_id }}"
-                                                      method="post">
-                                                    {% csrf_token %}
-                                                    <div class="column">
-                                                        <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Post"></div>
-                                                </form>
-                                            {% endif %}
-{#                                        <div>#}
-{#                                            <input onclick="hideOrShowDiv('Following_{{ tweet.tweet_id }}')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>#}
-{#                                        </div>#}
-
-                                                </ul>
-                                            </div>
-                                        </div>
-{#                                         <div style="display: block" id='Following_'{{ tweet.tweet_id }} >#}
-{#                                            {% for replies in tweet_replies %}#}
-{#                                                {% if tweet.tweet_id == replies.tweet_id %}#}
-{#                                                    {% for img in userprofile %}#}
-{#                                                        {% if img.user_profile_name == replies.author_id %}#}
-{#                                                            <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>#}
-{#                                                        {% endif %}#}
-{#                                                    {% endfor %}#}
-{#                                                    <p>{{ replies.content }}#}
-{#                                                        {% if replies.media_attachment.name != 'default.png' %}#}
-{#                                                            <img src="{{ replies.media_attachment.url }}" width="100" height="100">#}
-{#                                                        {% endif %}#}
-{#                                                    <p> {{ replies.reply_date }}</p>#}
-{#                                                    {% if  my_user_profile.user_profile_name  == replies.author_id %}#}
-{#                                                        <form class="site-form" action="/home/home.html?deletereply={{ replies.reply_id }}"#}
-{#                                                              method="post">#}
-{#                                                            {% csrf_token %}#}
-{#                                                            <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Reply">#}
-{#                                                        </form>#}
-{#                                                    {% endif %}#}
-{#                                                {% endif %}#}
-{#                                            {% endfor %}#}
-{#                                        </div>#}
+                                        {% endif %}
+                                    <div>
+                                        <input onclick="hideOrShowDiv('{{ tweet.tweet_id }}','1')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>
                                     </div>
 
-                                {% endif %}
-                            {% endfor %} <!--  needed to end for loop -->
-                        {% endfor %}
-                    </div>
-                </div>
+                                            </ul>
+                                        </div>
+                                    <div class="replies" id={{ tweet.tweet_id }} >
+                                        {% for replies in tweet_replies %}
+                                            {% if tweet.tweet_id == replies.tweet_id %}
+                                                {% for img in userprofile %}
+                                                    {% if img.user_profile_name == replies.author_id %}
+                                                        <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <p>{{ replies.content }}
+                                                    {% if replies.media_attachment.name != 'default.png' %}
+                                                        <img src="{{ replies.media_attachment.url }}" width="100" height="100">
+                                                    {% endif %}
+                                                <p> {{ replies.reply_date }}</p>
+                                                {% if  my_user_profile.user_profile_name  == replies.author_id %}
+                                                    <form class="site-form" action="/home/home.html?deletereply={{ replies.reply_id }}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Reply">
+                                                    </form>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    </div>
 
-            </aside>
+                                </div>
+
+                            {% endif %}
+                        {% endfor %} <!--  needed to end for loop -->
+                    {% endfor %}
+                </div>
+{#                </div>#}
+
+{#            </aside>#}
         </section>
 
         <!-- Modal for editing a post -->
@@ -439,20 +494,58 @@
 
 
         <script>
-            function hideOrShowDiv(id) {
+            function hideOrShowDiv(id,follow) {
                 console.log(id);
-              let x = document.getElementById(id);
-              if (x.style.display === "none") {
-                x.style.display = "block"
-              } else {
-                x.style.display = "none";
-              }
+
+                {#get the first one with this id#}
+                let x = document.getElementById(id);
+
+                let y = null;
+                {#if the called from following#}
+                if(follow == '1'){
+                    y = x;
+                    y.id = "temp_id";
+                    x = document.getElementById(id) || null;
+                    if(x){
+                        y.id = x.id;
+                    }
+                    else{
+                        x = y;
+                        x.id = id;
+                    }
+                }
+
+                // toggle the display state
+                if (x.style.display === "block") {
+                    x.style.display = "none"
+                } else {
+                    x.style.display = "block";
+                }
             }
+        </script>
+
+        <script>
+        function toggleView(){
+            let x = document.getElementsByClassName('replies');
+            [].forEach.call(x, function (ele) {ele.style.display='none'});
+            let toggleTo = document.getElementById('toggleButton').innerHTML;
+            if(toggleTo =='Following'){
+                document.getElementById('latest_tweet').style.display = 'none';
+                document.getElementById('following').style.display = 'block';
+                document.getElementById('toggleButton').innerText = 'Latest Tweets'
+            }
+            else{
+                document.getElementById('latest_tweet').style.display = 'block';
+                document.getElementById('following').style.display = 'none';
+                document.getElementById('toggleButton').innerText = 'Following'
+            }
+        }
         </script>
 
         <script>
             function myFunction() {
               var x = document.getElementById("myDIV");
+              var y = x.getElementsByClassName()
               if (x.style.display === "none") {
                 x.style.display = "block";
               } else {
