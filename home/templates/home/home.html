@@ -280,6 +280,7 @@
                                     <div class="replies" id={{ tweet.tweet_id }}  >
 
                                         {% for replies in tweet_replies %}
+                                            <br>
                                             {% if tweet.tweet_id == replies.tweet_id %}
                                                 {% for img in userprofile %}
                                                     {% if img.user_profile_name == replies.author_id %}
