@@ -2,9 +2,6 @@
 {% block content %}
     {% if user.is_authenticated %}
         <br>
-        <br>
-        <br>
-        <br>
         <style>
             /* The following button styling conflicts with the basic_style_layout.html button styling*/
             /* Commented to keep the submit button green (uniform to the whole website */
@@ -45,87 +42,87 @@
                 float: left;
                 width: 15%;
             }
-            {#.container2 {#}
-                {#max-width: 400px;#}
-            {#    width: 100%;#}
-            {#    margin:  auto;#}
-            {#    position: relative;#}
-            {#}#}
-            {#.latest_tweets{#}
-            {#    width: 700px;#}
-            {#    padding: 50px;#}
-            {#    border: 1px;#}
-            {#    margin: 0;#}
-            {#    position: relative;#}
-            {#    bottom: 15px;#}
-            {#    right: 300px;#}
-            {#    background-color: #E8E8E8;#}
-            {#}#}
-            {#.latest_tweets2{#}
-                {#width: 700px;#}
-            {#    padding: 50px;#}
-            {#    border: 1px;#}
-            {#    margin: 0;#}
-            {#    position: relative;#}
-            {#    bottom: 15px;#}
-                {#right: 300px;#}
-            {#    background-color: #E8E8E8;#}
-            {#}#}
-            {##}
-            {#.followed_tweets{#}
-            {#    width: 700px;#}
-            {#    padding: 20px;#}
-            {#    border: 1px;#}
-            {#    margin: 0;#}
-            {#    position: relative;#}
-            {#    top: 15px;#}
-            {#    right: 200px;#}
-            {#    background-color: #E8E8E8;#}
-            {#}#}
-            {#.followed_tweets2{#}
-                {#width: 700px;#}
-            {#    padding: 20px;#}
-            {#    border: 1px;#}
-            {#    margin: 0;#}
-            {#    position: relative;#}
-            {#    top: 15px;#}
-                {#right: 200px;#}
-            {#    background-color: #E8E8E8;#}
-            {#}#}
+            .container2 {
+                max-width: 400px;
+                width: 100%;
+                margin:  auto;
+                position: relative;
+            }
+            .latest_tweets{
+                width: 700px;
+                padding: 50px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                bottom: 15px;
+                right: 300px;
+                background-color: #E8E8E8;
+            }
+            .latest_tweets2{
+                width: 700px;
+                padding: 50px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                bottom: 15px;
+                right: 300px;
+                background-color: #E8E8E8;
+            }
+
+            .followed_tweets{
+                width: 700px;
+                padding: 20px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                top: 15px;
+                right: 200px;
+                background-color: #E8E8E8;
+            }
+            .followed_tweets2{
+                width: 700px;
+                padding: 20px;
+                border: 1px;
+                margin: 0;
+                position: relative;
+                top: 15px;
+                right: 200px;
+                background-color: #E8E8E8;
+            }
 
             .latest_tweets{
-                {#padding: 20%; #}
+                padding: 20%;
                 position: center;
                 background-position: center;
                 width: 60%;
                 margin: auto;
-                {#left: 20%;#}
-                {#right: 20%;#}
+                left: 20%;
+                right: 20%;
                 top: 2%;
                 background-color: #E8E8E8;
                 display: block;
             }
 
             .followed_tweets{
-                {#padding: 20%; #}
+                padding: 20%;
                 position: center;
                 background-position: center;
                 width: 60%;
                 margin: auto;
-                {#left: 20%;#}
-                {#right: 20%;#}
+                left: 20%;
+                right: 20%;
                 top: 2%;
                 background-color: #E8E8E8;
                 display: none;
             }
             .tweets{
-                {#padding: 20%; #}
+
                 position: center;
                 background-position: center;
                 width: 60%;
                 margin: auto;
-                {#left: 20%;#}
-                {#right: 20%;#}
+                left: 20%;
+                right: 20%;
                 top: 2%;
                 background-color: #E8E8E8;
             }
@@ -172,18 +169,18 @@
         </style>
 
 
-        <section id="pageContent">
+        <section id="pageContent" >
 
-{#        <div class="toggle_button">#}
+        <div class="toggle_button">
         <center>
             <button class="btn btn-primary" onclick="toggleView()" type="button" id="toggleButton" title="View comment">Following</button>
         </center>
-{#        </div>#}
-        <br><br><br><br>
+        </div>
+        <br>
 
 {#            <main role="main">#}
 {#            <div class = container2>#}
-                <div class="latest_tweets" id="latest_tweet">
+                <div class="tweets" id="latest_tweet">
                     <h2>Latest Tweets</h2>
                     {% for tweet in latest_tweets %}
                         {% if tweet.show_post == True %}
@@ -224,11 +221,11 @@
                                         </form>
 
                                         <div class="dropdown">
-{#                                        <form class="dropdown" action="/home/home.html?filter_replies={{ tweet.tweet_id }}" method="post">#}
+                                        <form class="dropdown" action="/home/home.html?filter_replies={{ tweet.tweet_id }}" method="post">
                                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                             Options
                                         <span class="caret"></span></button>
-{#                                        </form>#}
+                                        </form>
                                         <ul class="dropdown-menu">
 
                                         {% if  my_user_profile.user_profile_name  == tweet.author_id %}
@@ -269,7 +266,7 @@
                                                 <input type="image" alt="submit" src="/static/block_user.png" width="20" height="20" title="Block this user"></div>
                                         </form>
 
-{#                                        {% csrf_token %}#}
+                                        {% csrf_token %}
                                         <div>
                                             <input onclick="hideOrShowDiv('{{ tweet.tweet_id }}', '0')" type="image"  src="/static/comment.png"  width="20" height="20" title="View comment"/>
                                         </div>
@@ -278,9 +275,10 @@
                                     </div>
 
                                     <div class="replies" id={{ tweet.tweet_id }}  >
-
+{#                                    <h1>Replies<h1>#}
                                         {% for replies in tweet_replies %}
                                             {% if tweet.tweet_id == replies.tweet_id %}
+                                                <hr>
                                                 {% for img in userprofile %}
                                                     {% if img.user_profile_name == replies.author_id %}
                                                         <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>
@@ -310,7 +308,7 @@
 {#            </main>#}
 {#            <aside>#}
 {#                <div>#}
-                <div class="followed_tweets" id="following">
+                <div class="tweets" id="following">
                      <h2>Following</h2>
                     {% for followed in following %}
                         {% for tweet in latest_tweets %}
@@ -387,8 +385,10 @@
                                             </ul>
                                         </div>
                                     <div class="replies" id={{ tweet.tweet_id }} >
+                                    <h1>Replies<h1>
                                         {% for replies in tweet_replies %}
                                             {% if tweet.tweet_id == replies.tweet_id %}
+                                                <hr>
                                                 {% for img in userprofile %}
                                                     {% if img.user_profile_name == replies.author_id %}
                                                         <p><img src={{ img.user_profile_picture.url }} width="50" height="50">{{ replies.author_id }}</p>
@@ -499,11 +499,11 @@
             function hideOrShowDiv(id,follow) {
                 console.log(id);
 
-                {#get the first one with this id#}
+                get the first one with this id
                 let x = document.getElementById(id);
 
                 let y = null;
-                {#if the called from following#}
+                if the called from following
                 if(follow == '1'){
                     y = x;
                     y.id = "temp_id";
@@ -581,39 +581,39 @@
             </div>
         </div>
 
-{#<!-- Modal for reading comments -->#}
-{#<div id="ReadComments" class="modal fade" role="dialog">#}
-{#    <div class="modal-dialog">#}
-{##}
-{#        <!-- Modal content for showing private messages-->#}
-{#        <div class="modal-content">#}
-{#            <div class="modal-header">#}
-{#                <h4 class="modal-title">Your Comments</h4>#}
-{#                <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-{#            </div>#}
-{#            <div class="modal-body">#}
-{#                {% for reply in tweet_replies_filtered %}#}
-{#                    <div> {{ reply }}</div>#}
-{#                    {% if mail.target_user_id == my_user_profile.user_profile_name and mail.show_message == True %}#}
-{#                        <p>Sent from: {{ mail.source_author_id }}#}
-{#                        <p>{{ mail.content }}#}
-{#                            <!--  attach our images to posts only if they are not the default -->#}
-{#                            {% if mail.media_attachment.name != 'default.png' %}#}
-{#                                <p> <img src={{ mail.media_attachment.url }} width="200" height="200">#}
-{#                            {% endif %}#}
-{#                        <p>Sent: {{ mail.sent_date }}#}
-{#                        <form class="site-form" action="/home/home.html?deleteprivatemsg={{ mail.private_message_id }}"#}
-{#                              method="post">#}
-{#                            {% csrf_token %}#}
-{#                            <div class="column">#}
-{#                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Message"></div>#}
-{#                        </form>#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
+<!-- Modal for reading comments -->
+<div id="ReadComments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content for showing private messages-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your Comments</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {% for reply in tweet_replies_filtered %}
+                    <div> {{ reply }}</div>
+                    {% if mail.target_user_id == my_user_profile.user_profile_name and mail.show_message == True %}
+                        <p>Sent from: {{ mail.source_author_id }}
+                        <p>{{ mail.content }}
+                            <!--  attach our images to posts only if they are not the default -->
+                            {% if mail.media_attachment.name != 'default.png' %}
+                                <p> <img src={{ mail.media_attachment.url }} width="200" height="200">
+                            {% endif %}
+                        <p>Sent: {{ mail.sent_date }}
+                        <form class="site-form" action="/home/home.html?deleteprivatemsg={{ mail.private_message_id }}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="column">
+                                <input type="image" alt="submit" src="/static/delete.png" width="20" height="20" title="Delete Message"></div>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
     {% else %}
         <script>
             window.location.href = '/';
