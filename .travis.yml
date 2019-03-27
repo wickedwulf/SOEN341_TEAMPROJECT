@@ -11,6 +11,7 @@ matrix:
 install:
   - pip install -q -r requirements.txt
   - pip install Django==2.1.7
+  - pip install pylint-django[with_django]
 
 script:
   - python manage.py test accounts -v 2
