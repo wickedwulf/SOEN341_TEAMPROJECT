@@ -11,18 +11,22 @@ matrix:
 install:
   - pip install -q -r requirements.txt
   - pip install Django==2.1.7
+  - pip install pylint
   - pip install pylint-django[with_django]
+
+before_script:
+  - pylint --version
 
 script:
   - python manage.py test accounts -v 2
   - python manage.py test core_site -v 2
   - python manage.py test home -v 2
   - python manage.py test djangosrc -v 2
-  - pylint.exe --load-plugins pylint_django \home\admin.py
-  - pylint.exe --load-plugins pylint_django \home\forms.py
-  - pylint.exe --load-plugins pylint_django \home\models.py
-  - pylint.exe --load-plugins pylint_django \home\views.py
-  - pylint.exe --load-plugins pylint_django \accounts\admin.py
-  - pylint.exe --load-plugins pylint_django \accounts\forms.py
-  - pylint.exe --load-plugins pylint_django \accounts\models.py
-  - pylint.exe --load-plugins pylint_django \accounts\views.py
+  - pylint.exe --load-plugins pylint_django /home/admin.py
+  - pylint.exe --load-plugins pylint_django /home/forms.py
+  - pylint.exe --load-plugins pylint_django /home/models.py
+  - pylint.exe --load-plugins pylint_django /home/views.py
+  - pylint.exe --load-plugins pylint_django /accounts/admin.py
+  - pylint.exe --load-plugins pylint_django /accounts/forms.py
+  - pylint.exe --load-plugins pylint_django /accounts/models.py
+  - pylint.exe --load-plugins pylint_django /accounts/views.py
