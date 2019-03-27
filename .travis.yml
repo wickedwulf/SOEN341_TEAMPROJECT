@@ -17,3 +17,11 @@ script:
   - python manage.py test core_site -v 2
   - python manage.py test home -v 2
   - python manage.py test djangosrc -v 2
+  - pylint.exe --load-plugins pylint_django \home\admin.py
+  - pylint.exe --load-plugins pylint_django \home\forms.py
+  - pylint.exe --load-plugins pylint_django \home\models.py
+  - pylint.exe --load-plugins pylint_django \home\views.py
+  - pylint.exe --load-plugins pylint_django \accounts\admin.py
+  - pylint.exe --load-plugins pylint_django \accounts\forms.py
+  - pylint.exe --load-plugins pylint_django \accounts\models.py
+  - pylint.exe --load-plugins pylint_django \accounts\views.py

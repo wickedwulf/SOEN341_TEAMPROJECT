@@ -1,3 +1,4 @@
+""" urls file for home app """
 from django.conf.urls import url
 from . import views
 

@@ -1,3 +1,4 @@
+"""" Url file that handles requests from the website """
 from django.conf.urls import url
 from accounts import views
 

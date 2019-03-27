@@ -1,9 +1,11 @@
+"""" Class / database structure for the user profile and encryption list """
 from django.db import models
 from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 
 
-class user_profile(models.Model):
+class UserProfile(models.Model):
+    """" Class for handling the user profile information """
     user_name = models.CharField(max_length=255)
     user_profile_name = models.CharField(max_length=255)
     user_password = models.CharField(max_length=255, default='**********')
@@ -23,7 +25,8 @@ class user_profile(models.Model):
     about_user = models.TextField(max_length=255, default=' ', blank=True)
 
 
-class user_encryption_key_list(models.Model):
+class UserEncryptionKeyList(models.Model):
+    """" Class for handling the user encryption key list for the encoded messages """
     user_profile_name = models.CharField(max_length=255, blank=True)
     encryption_key = models.CharField(max_length=255, blank=True)
     enc_keys_notes = models.TextField(max_length=255, blank=True)

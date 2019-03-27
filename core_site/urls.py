@@ -1,3 +1,4 @@
+""" Url file for the core site"""
 from django.conf.urls import url
 from . import views
 

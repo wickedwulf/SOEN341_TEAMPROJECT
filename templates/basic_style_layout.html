@@ -30,20 +30,20 @@
                 <li>
                     <table style="background-color:#FFFFFF;">
                         <tr>
-                                <td><img src="{{ my_user_profile.user_profile_picture.url }}" width="70" height="70" style="margin-right:20px;"></td>
+                            <td><img src="{{ my_user_profile.user_profile_picture.url }}" width="70" height="70" style="margin-right:20px;"></td>
 
-                                <td>{{ user.get_username }}<br><br>
+                            <td>{{ user.get_username }}<br><br>
                                 {% if userprofile.user_profile_name != null %}
                                     Profile ID: {{ userprofile.user_profile_name }}
                                 {% else %}
                                     {% for name in userprofile %}
                                         {% if name.user_name == user.get_username %}
-                                            Your Profile ID: {{ name.user_profile_name }}
+                                            Profile ID: {{ name.user_profile_name }}
                                         {% endif %}
                                     {% endfor %}
-            
+
                                 {% endif %}
-                                </td>
+                            </td>
                         </tr>
                     </table>
 
@@ -63,7 +63,7 @@
                         {% endfor %}
 
                     {% endif %} -->
-                    
+
 
                 </li>
 
@@ -74,33 +74,28 @@
                 </li>
 
 
-                 <li>
+                <li>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#TweetDialog">
                         Tweet
                     </button>
                 </li>
 
 
-
-                    <div class="navbar-brand">
-                        <form action="/home">
-                            <button type="submit" class="logo-button">
-                                <img src="/static/soen341logo.png">
-                            </button>
-                        </form>
-                    </div>
+                <div class="navbar-brand">
+                    <form action="/home">
+                        <button type="submit" class="logo-button">
+                            <img src="/static/soen341logo.png">
+                        </button>
+                    </form>
+                </div>
 
 
                 <li>
+                    <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#PrivateMessage">
                         Message
                     </button>
-                    <input type="image" src="/static/mail.png" width="20" height="20" title="Read Messages" data-toggle="modal" data-target="#ReadMail">
                 </li>
-
-
-
-
 
 
                 <li>
@@ -111,17 +106,19 @@
                 </li>
 
 
-                        <li>
+                <li>
 
-                <form class="search-user" method="GET" action="/accounts/search.html">
-                    <table>
-                        <tr>
-                            <td><input placeholder="@user" type="text" name="search"></td>
-                            <td> <button type="submit" ><img class="search" style="height: 20px; width: 20px" src="/static/search.png"></button></td>
-                        </tr>
-                    </table>
-                </form>
-                        </li>
+                    <form class="search-user" method="GET" action="/accounts/search.html">
+                        <table>
+                            <tr>
+                                <td><input placeholder="@user" type="text" name="search"></td>
+                                <td>
+                                    <button type="submit"><img class="search" style="height: 20px; width: 20px" src="/static/search.png"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>

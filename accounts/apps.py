@@ -1,3 +1,4 @@
+""" App name config"""
 from django.apps import AppConfig
 
 
