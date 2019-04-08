@@ -23,7 +23,7 @@ class TestUrls(TestCase):
         self.assertEquals(resolve(url).func, logout_view)
 
     def test_user_search_view_is_resolved(self):
-        url = reverse('accounts:logou')
+        url = reverse('accounts:user_search_view')
         self.assertEquals(resolve(url).func, user_search_view)
 
 
