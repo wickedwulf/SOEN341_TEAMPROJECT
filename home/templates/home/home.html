@@ -307,7 +307,11 @@
 
                                         <!--  fields found in models.py used for displaying our data -->
 
-                                            {{ tweet.content }}
+                                            {% if tweet.show_encrypted == False %}
+                                            <p>{{ tweet.content }}
+                                            {% else %}
+                                            <p>{{ tweet.encrypted_content }}
+                                            {% endif %}
                                             <br>
                                             <br>
 
