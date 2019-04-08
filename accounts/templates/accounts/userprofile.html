@@ -114,11 +114,7 @@
                             {% endif %}
                         {% endfor %}
 
-                            <h2>{% if tweet.show_encrypted == False %}
-                                        <p>{{ tweet.content }}
-                                            {% else %}
-                                        <p>{{ tweet.encrypted_content }}
-                                    {% endif %}</h2>
+                            <h2>{{ my_pinned_tweets.content }}</h2>
                             <h6>Posted: {{ my_pinned_tweets.published }}</h6>
                           <form class="site-form" action="/accounts/userprofile.html?pin={{ my_pinned_tweets.tweet_id }}" method="post">
                              {% csrf_token %}
