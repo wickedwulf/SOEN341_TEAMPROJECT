@@ -20,7 +20,10 @@ class TestUrls(TestCase):
 
     def test_user_logout_view_is_resolved(self):
         url = reverse('accounts:logout')
-        self.assertEquals(resolve(url).func,logout_view)
+        self.assertEquals(resolve(url).func, logout_view)
 
+    def test_user_search_view_is_resolved(self):
+        url = reverse('accounts:logou')
+        self.assertEquals(resolve(url).func, user_search_view)
 
 
