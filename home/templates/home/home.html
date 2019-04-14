@@ -296,7 +296,15 @@
 
                                         <!--  fields found in models.py used for displaying our data -->
 
-                                            {{ tweet.content }}
+                                            {% if tweet.show_encrypted == False %}
+                                            <p>{{ tweet.content }}
+                                            {% else %}
+                                            <p>{{ tweet.encrypted_content }}
+                                            {% endif %}
+
+                                            {% if tweet.media_attachment.name != 'default.png' %}
+                                                <p> <img src={{ tweet.media_attachment.url }} width="200" height="200">
+                                            {% endif %}
                                             <br>
                                             <br>
 

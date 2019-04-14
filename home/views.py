@@ -11,7 +11,11 @@ from . import forms
 
 def homeactions(request):
     """ this function handles all the quests for the home app """
-    my_user_profile = UserProfile.objects.get(user_name=request.user)
+    try:
+        my_user_profile = UserProfile.objects.get(user_name=request.user)
+    except UserProfile.DoesNotExist:
+        return redirect("/index.html")
+
     blocked_list = BlockedUsers.objects.all()
     latest_tweets = TwitterTweet.objects.all().order_by('published').reverse()  # used to apply  blocking feature
 
